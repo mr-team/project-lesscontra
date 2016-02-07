@@ -14,7 +14,8 @@ public class PlayerController : MonoBehaviour
 	//For the click to move function
 	NavMeshAgent navAgent;
 
-	Vector3 targetPosition;
+    [HideInInspector]
+    public Vector3 targetPosition;
 
 	public bool isCrouching;
 	public bool isProne;
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
 		transform.localPosition += dir * Speed * Time.deltaTime;
 	}
 
-	void ClickToMove ()
+	public void ClickToMove ()
 	{
 		if (isRunning)
 		{
