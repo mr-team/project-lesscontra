@@ -707,13 +707,17 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 692527255}
     m_Modifications:
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.size
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.x
       value: -12.2600002
       objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 3.6500001
+      value: 2.63000011
       objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.z
@@ -749,11 +753,111 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 6cdd136c6ce1a0345b522f1af2772316, type: 2}
     - target: {fileID: 11475346, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: viewRadius
-      value: 18.3700008
+      value: 5.6500001
       objectReference: {fileID: 0}
     - target: {fileID: 11475346, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: viewAngle
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].wait
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.x
+      value: -9.89999962
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.y
+      value: 2.63000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.z
+      value: -7.44000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].wait
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.x
+      value: -9.89999962
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.y
+      value: 2.63000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.z
+      value: -9.80000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].wait
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.x
+      value: -13.2399998
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.y
+      value: 2.63000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.z
+      value: -9.80000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.x
+      value: -12.2600002
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.y
+      value: 2.63000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.z
+      value: -7.44000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.x
+      value: -19.0200005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.z
+      value: -8.76000023
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].name
+      value: Walking
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
@@ -1115,17 +1219,21 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 692527255}
     m_Modifications:
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.size
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -22.1000004
+      value: -23.1100006
       objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.41999996
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 5.30000019
+      value: -1.27999997
       objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1157,11 +1265,171 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 6cdd136c6ce1a0345b522f1af2772316, type: 2}
     - target: {fileID: 11475346, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: viewRadius
-      value: 18.1399994
+      value: 9.02999973
       objectReference: {fileID: 0}
     - target: {fileID: 11475346, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: viewAngle
       value: 149
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.x
+      value: -16.0400009
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.z
+      value: 4.5999999
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.x
+      value: -23.7900009
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.z
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.x
+      value: -23.1100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.z
+      value: 13.3999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.x
+      value: -16.6900005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.z
+      value: 12.6999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.x
+      value: -24.7199993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.z
+      value: 14.6000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].walkToPoint.x
+      value: -24.7299995
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].walkToPoint.y
+      value: 1.20000005
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].walkToPoint.z
+      value: -13.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].walkToPoint.x
+      value: -16.6100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].walkToPoint.z
+      value: -14.3999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].walkToPoint.x
+      value: -23.1100006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].walkToPoint.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].walkToPoint.z
+      value: -1.27999997
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].name
+      value: Walking
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
@@ -1515,6 +1783,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 692527255}
     m_Modifications:
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.size
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 400782, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_LocalPosition.x
       value: 4.5
@@ -1551,6 +1823,206 @@ Prefab:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 6cdd136c6ce1a0345b522f1af2772316, type: 2}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.x
+      value: -8.38000011
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].walkToPoint.z
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[0].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.x
+      value: 5.26000023
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].walkToPoint.z
+      value: 2.07999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[1].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.x
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].walkToPoint.z
+      value: 6.32999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[2].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.x
+      value: -7.84000015
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].walkToPoint.z
+      value: 7.36999989
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[3].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.x
+      value: -1.24000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].walkToPoint.z
+      value: 10.3100004
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[4].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].walkToPoint.x
+      value: -5.30000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].walkToPoint.z
+      value: 13.1000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[5].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].walkToPoint.x
+      value: 11.3999996
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].walkToPoint.z
+      value: 14.6899996
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[6].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].walkToPoint.x
+      value: 11.6400003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].walkToPoint.z
+      value: -13.6400003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[7].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[8].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[8].walkToPoint.x
+      value: -3.44000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[8].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[8].walkToPoint.z
+      value: -13.8199997
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[8].name
+      value: Walking
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[9].wait
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[9].walkToPoint.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[9].walkToPoint.y
+      value: 1.34000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[9].walkToPoint.z
+      value: -.319999993
+      objectReference: {fileID: 0}
+    - target: {fileID: 11497774, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: guardActions.Array.data[9].name
+      value: Walking
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
   m_IsPrefabParent: 0

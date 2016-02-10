@@ -5,9 +5,12 @@ using UnityEditor;
 [CustomEditor(typeof(CanIWalkNow))]
 public class WalkingEditor : Editor {
 
+    private Vector3 minVector = new Vector3(float.MinValue, float.MinValue, float.MinValue);
+
     void OnSceneGUI() {
         CanIWalkNow master = (CanIWalkNow) target;
-        Vector3 lastPos = master.GetComponent<Transform>().position;
+        Vector3 lastPos = master.guardActions[master.guardActions.Count - 1].walkToPoint != minVector ?
+                            master.guardActions[master.guardActions.Count - 1].walkToPoint : master.GetComponent<Transform>().position;
         if(master.guardActions.Count == 0)
             return;
         for(int i = 0; i < master.guardActions.Count; i++) {
