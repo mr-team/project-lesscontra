@@ -6,18 +6,45 @@ public class CanIWalkNow : MonoBehaviour {
     [HideInInspector]
     public List<NPCAction> guardActions = new List<NPCAction>();
 
-    private int onCurrentAction = 0;
+    public float walkSpeed = 1.5f;
+    public float turnSpeed = 2f;
 
-    void Awake() {
-        NPCAction walk = new NPCAction(Vector3.zero);
-        guardActions.Add(walk);
+    private int onCurrentAction = 0;
+    private float waitTimer = 0f;
+
+    private float closeEnoughLimit = 0.2f;
+    private Vector3 _direction;
+    private Quaternion _lookRotation;
+
+    bool nextAction() {
+        int actions = guardActions.Count - 1;
+        if(onCurrentAction == actions) {
+            onCurrentAction = 0;
+            return false;
+        }
+        onCurrentAction++;
+        return true;
     }
 
     void FixedUpdate() {
         if(guardActions.Count == 0)
             return;
         NPCAction dis = guardActions[onCurrentAction];
-        Vector3.MoveTowards(transform.position, dis.walkToPoint, 1f);
+        if(dis.name == "Walking") {
+            if(Vector3.Distance(transform.position, dis.walkToPoint) >= closeEnoughLimit) {
+                _direction = (dis.walkToPoint - transform.position).normalized;
+                _lookRotation = Quaternion.LookRotation(_direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.fixedDeltaTime * turnSpeed);
+                transform.position = Vector3.MoveTowards(transform.position, dis.walkToPoint, Time.fixedDeltaTime * walkSpeed);
+            } else {
+                waitTimer += Time.fixedDeltaTime;
+                if(waitTimer >= dis.wait) {
+                    nextAction();
+                    waitTimer = 0f;
+                }
+            }
+            
+        }
     }
 
     [System.Serializable]
