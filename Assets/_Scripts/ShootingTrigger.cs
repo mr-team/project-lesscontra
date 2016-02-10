@@ -3,7 +3,6 @@ using System.Collections;
 
 public class ShootingTrigger : MonoBehaviour
 {
-	public GameObject arrow;
 
 	PlayerController playerController;
 
@@ -18,15 +17,14 @@ public class ShootingTrigger : MonoBehaviour
 	
 	}
 
-	void OnTriggerStay (Collider other)
+	void OnTriggerEnter (Collider other)
 	{
-		Debug.Log ("somthing entered the trigger");
+		
 
 		if (other.tag == "Player")
 		{
 			playerController.SnapToPoint (transform.position);
-			if (arrow != null)
-				arrow.SetActive (true);
+			playerController.GoToFPMode ();
 
 		}
 

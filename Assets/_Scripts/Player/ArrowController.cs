@@ -1,74 +1,48 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent (typeof(Rigidbody))]
 public class ArrowController : MonoBehaviour
 {
-	public Transform rotateUp;
-	public Transform rotateDown;
-	public Transform rotateRight;
-	public Transform rotateLeft;
-
 	Transform standardRotate;
 	Rigidbody arrowRigid;
-	bool arrowFired;
-	public float speed;
-	public float lerpSpeed;
+	public bool arrowFired;
+	float speed;
+	float lerpSpeed;
+	float force;
 
-	void Start ()
+	void Awake ()
 	{
-		gameObject.SetActive (false);
 		arrowRigid = gameObject.GetComponent<Rigidbody> ();
+		arrowRigid.isKinematic = true;
 		standardRotate = transform;
 	}
 
 
 	void Update ()
 	{
-		if (Input.GetMouseButtonDown (0) && !arrowFired)
-		{
-			arrowFired = true;
-		}
 		if (arrowFired)
-		{
-			FireArrow ();
-			ControlArrow ();
-		}
+			transform.forward = Vector3.Slerp (transform.forward, arrowRigid.velocity.normalized, Time.deltaTime * 2f);
+
 	}
 
-
-
-	
-
-	void FireArrow ()
+	public void FireArrow (float force)
 	{
-		//transform.Translate (Vector3.forward * speed);
-		transform.localPosition += transform.forward * Time.deltaTime * speed;
+		arrowRigid.isKinematic = false;
+		transform.SetParent (null);
+		arrowRigid.AddRelativeForce (Vector3.forward * force);
+		arrowFired = true;
+	}
+
+	void OnCollisionEnter (Collision other)
+	{
+		arrowRigid.isKinematic = true;
+
 	}
 
 	void ControlArrow ()
 	{
-		if (Input.GetKey (KeyCode.W))
-		{
-			transform.rotation = Quaternion.Lerp (standardRotate.rotation, rotateUp.rotation, lerpSpeed);
-
-		}
-		if (Input.GetKey (KeyCode.A))
-		{
-			transform.rotation = Quaternion.Lerp (standardRotate.rotation, rotateLeft.rotation, lerpSpeed);
-		}
-
-		if (Input.GetKey (KeyCode.S))
-		{
-			transform.rotation = Quaternion.Lerp (standardRotate.rotation, rotateDown.rotation, lerpSpeed);
-		}
-
-		if (Input.GetKey (KeyCode.D))
-		{
-			transform.rotation = Quaternion.Lerp (standardRotate.rotation, rotateRight.rotation, lerpSpeed);
-		}
-
-
-
+		
 	}
 }
 	
