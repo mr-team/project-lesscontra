@@ -6,16 +6,18 @@ using System.Collections;
 public class PlayerController : MonoBehaviour
 {
 	public bool shouldCameraFollowPlayer = true;
-	public bool MoveWithArrows;
+	public GameObject TPMode;
+	public GameObject FPMode;
+	public ArrowController arrowControll;
 
 	Player player;
 	Animator playerAnim;
 
-	//For the click to move function
+
+	//ClickToMove
 	NavMeshAgent navAgent;
 
-    [HideInInspector]
-    public Vector3 targetPosition;
+	public Vector3 targetPosition;
 
 	public bool isCrouching;
 	public bool isProne;
@@ -29,12 +31,40 @@ public class PlayerController : MonoBehaviour
 
 	float timer;
 
+	//FPMode
+	Camera FPCamera;
+	public bool FPModeActive;
+	public float minForce;
+	public float maxForce;
+
+	bool transitionToFPMode;
+	bool hasFiredArrow;
+	float fireForce;
+
+	//FPCameraControll
+
+	public float sensitivityX = 15F;
+	public float sensitivityY = 15F;
+	public float minimumX = -360F;
+	public float maximumX = 360F;
+	public float minimumY = -60F;
+	public float maximumY = 60F;
+	float rotationY = 0F;
+	float rotationX = 0f;
+
 	void Awake ()
 	{
 		player = GetComponent<Player> ();
 		navAgent = GetComponent<NavMeshAgent> ();
 		playerAnim = GetComponent<Animator> ();
 		moveSpeed = player.walkSpeed;
+		FPCamera = GameObject.Find ("FPCamera").GetComponent<Camera> ();
+
+		if (FPCamera == null)
+			Debug.LogError ("There is no FPMode camera on the player");
+		
+		GoToTPMode ();
+		FPModeActive = false;
 	}
 
 	void Start ()
@@ -45,27 +75,57 @@ public class PlayerController : MonoBehaviour
 
 	void Update ()
 	{
-		if (shouldCameraFollowPlayer)
+		if (shouldCameraFollowPlayer && !FPModeActive)
 			Camera.main.transform.position = new Vector3 (this.transform.position.x - 15f, 30f, this.transform.position.z - 15f);
 		
-		//movement
-		if (MoveWithArrows) 	//should the player be controlled by WASD... 
-			WASDMove ();
-		else if (!MoveWithArrows)	//... or by clicking on the ground
+		ChangeState (); 	//Update the movement state of the player
+
+		if (Input.GetMouseButton (0) && !FPModeActive)
 		{
-			ChangeState (); 	//Update the movement state of the player
+			if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground
+			{
+				SetTargetPosition (CheckClickedLayer ()); 	//set the target position to the clicket point
+				ClickToMove ();		//move the player to the clicked point
+
+			} else if (CheckClickedLayer () == 10) 		//if the clicked layer was a scalable wall
+			{
+				SetTargetPosition (CheckClickedLayer (), GetClickedTransform ()); //move the player to the "jump" spot by the wall
+			}
+		}
+
+		if (Input.GetKeyDown (KeyCode.J) && FPModeActive)
+		{
+			GoToTPMode ();
+
+		}
+			
+		if (Input.GetKeyDown (KeyCode.K) && !FPModeActive)
+		{
+			GoToFPMode ();
+
+		}
+
+		if (FPModeActive)
+		{
+			CamControll ();
 
 			if (Input.GetMouseButton (0))
 			{
-				if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground
-				{
-					SetTargetPosition (CheckClickedLayer ()); 	//set the target position to the clicket point
-					ClickToMove ();		//move the player to the clicked point
+				float modifyer = 1500f;
 
-				} else if (CheckClickedLayer () == 10) 		//if the clicked layer was a scalable wall
-				{
-					SetTargetPosition (CheckClickedLayer (), GetClickedTransform ()); //move the player to the "jump" spot by the wall
-				}
+				fireForce += Time.deltaTime * modifyer;
+
+			}
+			if (Input.GetMouseButtonUp (0))
+			{
+				if (fireForce < minForce)
+					fireForce = minForce;
+				if (fireForce > maxForce)
+					fireForce = maxForce;
+				
+				arrowControll.FireArrow (fireForce);
+
+				fireForce = 0F;
 			}
 		}
 
@@ -120,12 +180,23 @@ public class PlayerController : MonoBehaviour
 	{
 		if (layer == 8)
 		{
-			Plane plane = new Plane (Vector3.up, transform.position);
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			/*Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+
+			Plane plane = new Plane (Vector3.up, mousePos); //creates a flat plane with a normal up, at the point of the player STUPID!
+
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); //creates a ray from camerea throug mouse pointer
 			float point = 0f;
 
-			if (plane.Raycast (ray, out point))
-				targetPosition = ray.GetPoint (point);	
+			if (plane.Raycast (ray, out point)) //is the ray intercepts the plane return its point 
+				targetPosition = ray.GetPoint (point);	//store the point in a vector 3*/
+
+			RaycastHit hit;
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			if (Physics.Raycast (ray, out hit)) //if the raycast hit somthing
+			{
+				if (hit.transform.gameObject.layer == 8) //if it hit an object in the ground layer
+					targetPosition = hit.point; //get the point where ray hit the object
+			}
 		}
 	}
 
@@ -136,12 +207,13 @@ public class PlayerController : MonoBehaviour
 	{
 		if (layer == 8)
 		{
-			Plane plane = new Plane (Vector3.up, transform.position);
+			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			float point = 0f;
-
-			if (plane.Raycast (ray, out point))
-				targetPosition = ray.GetPoint (point);	
+			if (Physics.Raycast (ray, out hit))
+			{
+				if (hit.transform.gameObject.layer == 8)
+					targetPosition = hit.point;
+			}
 		}
 		if (layer == 10)
 		{
@@ -255,7 +327,6 @@ public class PlayerController : MonoBehaviour
 		//Set destination to wall
 
 		navAgent.SetDestination (jumpPoint);
-
 	}
 
 	public void JumpWall ()
@@ -269,5 +340,53 @@ public class PlayerController : MonoBehaviour
 			return;
 
 		transform.position = point;
+	}
+
+	public void GoToFPMode ()
+	{
+		FPMode.SetActive (true);
+		TPMode.SetActive (false);
+
+		Cursor.visible = (false);
+		Cursor.lockState = CursorLockMode.Locked;
+		arrowControll.gameObject.SetActive (true);
+
+		FPModeActive = true;
+	}
+
+	public void GoToTPMode ()
+	{
+		TPMode.SetActive (true);
+		FPMode.SetActive (false);
+
+		Cursor.visible = (true);
+		Cursor.lockState = CursorLockMode.None;
+
+		FPModeActive = false;
+	}
+
+	//FPModeFunctions
+
+	void CamControll ()
+	{
+		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
+
+		if (rotationX > 180)
+		{
+			rotationX -= 360;
+		}
+
+		if (rotationX <= minimumX)
+			rotationX = minimumX;
+
+		if (rotationX >= maximumX)
+			rotationX = maximumX;
+
+		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
+
+		transform.localEulerAngles = calcRotation;
 	}
 }
