@@ -14,6 +14,8 @@ public class Actor : MonoBehaviour
 	protected bool isMerchant = true;
 	protected bool isSkillMaster = true;
 
+	protected float health;
+
 	protected virtual void Awake ()
 	{
 		if (isHostile)
