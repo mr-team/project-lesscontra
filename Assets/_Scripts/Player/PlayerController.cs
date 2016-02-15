@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 	public GameObject TPMode;
 	public GameObject FPMode;
 	public ArrowController arrowControll;
+	public CameraController FPCamControll;
+
+	public GameObject arrow;
 
 	Player player;
 	Animator playerAnim;
@@ -43,14 +46,6 @@ public class PlayerController : MonoBehaviour
 
 	//FPCameraControll
 
-	public float sensitivityX = 15F;
-	public float sensitivityY = 15F;
-	public float minimumX = -360F;
-	public float maximumX = 360F;
-	public float minimumY = -60F;
-	public float maximumY = 60F;
-	float rotationY = 0F;
-	float rotationX = 0f;
 
 	void Awake ()
 	{
@@ -65,6 +60,7 @@ public class PlayerController : MonoBehaviour
 		
 		GoToTPMode ();
 		FPModeActive = false;
+
 	}
 
 	void Start ()
@@ -107,11 +103,11 @@ public class PlayerController : MonoBehaviour
 
 		if (FPModeActive)
 		{
-			CamControll ();
+			
 
 			if (Input.GetMouseButton (0))
 			{
-				float modifyer = 1500f;
+				float modifyer = 300f;
 
 				fireForce += Time.deltaTime * modifyer;
 
@@ -123,8 +119,8 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-				arrowControll.FireArrow (fireForce);
-
+				arrowControll.FireArrow (fireForce, Mathf.Abs (FPCamControll.planarRotationX.x - 360f));
+			
 				fireForce = 0F;
 			}
 		}
@@ -363,30 +359,5 @@ public class PlayerController : MonoBehaviour
 		Cursor.lockState = CursorLockMode.None;
 
 		FPModeActive = false;
-	}
-
-	//FPModeFunctions
-
-	void CamControll ()
-	{
-		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
-
-		if (rotationX > 180)
-		{
-			rotationX -= 360;
-		}
-
-		if (rotationX <= minimumX)
-			rotationX = minimumX;
-
-		if (rotationX >= maximumX)
-			rotationX = maximumX;
-
-		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
-		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
-
-		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
-
-		transform.localEulerAngles = calcRotation;
 	}
 }
