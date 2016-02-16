@@ -15,12 +15,6 @@ public class CameraController : MonoBehaviour
 	float rotationY = 0F;
 	float rotationX = 0f;
 
-	void Start ()
-	{
-	
-	}
-
-	
 	void Update ()
 	{
 		CamControll ();

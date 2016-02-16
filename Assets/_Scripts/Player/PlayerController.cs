@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
+	public GameObject arrowMode;
 	public ArrowController arrowControll;
 	public CameraController FPCamControll;
 
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
 	//FPCameraControll
 
+	//ArrowMode
+	bool arrowModeActive;
 
 	void Awake ()
 	{
@@ -162,8 +165,6 @@ public class PlayerController : MonoBehaviour
 		{
 			moveSpeed = player.proneSpeed;
 		}
-		 
-		Debug.Log (targetPosition);
 
 		navAgent.speed = moveSpeed;
 		navAgent.SetDestination (targetPosition);
@@ -342,22 +343,39 @@ public class PlayerController : MonoBehaviour
 	{
 		FPMode.SetActive (true);
 		TPMode.SetActive (false);
+		arrowMode.SetActive (false);
 
 		Cursor.visible = (false);
 		Cursor.lockState = CursorLockMode.Locked;
 		arrowControll.gameObject.SetActive (true);
 
 		FPModeActive = true;
+		arrowModeActive = false;
 	}
 
 	public void GoToTPMode ()
 	{
 		TPMode.SetActive (true);
 		FPMode.SetActive (false);
+		arrowMode.SetActive (false);
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
 
 		FPModeActive = false;
+		arrowModeActive = false;
+	}
+
+	public void GoToArrowMode ()
+	{
+		arrowMode.SetActive (true);
+		TPMode.SetActive (false);
+		FPMode.SetActive (false);
+
+		Cursor.visible = (true);
+		Cursor.lockState = CursorLockMode.None;
+
+		FPModeActive = false;
+		arrowModeActive = true;
 	}
 }

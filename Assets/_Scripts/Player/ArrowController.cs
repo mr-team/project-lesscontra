@@ -4,28 +4,17 @@ using System.Collections;
 [RequireComponent (typeof(Rigidbody))]
 public class ArrowController : MonoBehaviour
 {
-	public Transform arrowAnchor;
 	public CameraController camControll;
+	Arrow arrow;
 	Transform standardRotate;
 	Rigidbody arrowRigid;
-
+	PlayerController playerControll;
 	public bool arrowFired;
 
-	Vector3 startRotation;
-	Vector3 calcRotation;
-	Vector3 Velocity;
-	Vector3 newVelocityDir;
-
-	Vector3 CurrentAngle;
-
-	public Vector3 MaxRotateLeft;
-	public Vector3 MaxRotateRight;
-	public Vector3 MaxRotateUp;
-	public Vector3 MaxRotateDown;
+	bool hitSomthing;
 
 	float speed = 10f;
 	float lerpSpeed;
-
 
 	public float sensitivityX;
 	public float sensitivityY;
@@ -41,40 +30,30 @@ public class ArrowController : MonoBehaviour
 	void Awake ()
 	{
 		arrowRigid = gameObject.GetComponent<Rigidbody> (); //find the arrows rigidbody
-		arrowRigid.isKinematic = true; //makes sure the arrow does not fall to the ground before it is fired
+		arrow = GetComponent<Arrow> ();
+		playerControll = GameObject.Find ("Player").GetComponent<PlayerController> ();
 	}
 
 	void Update ()
 	{
-		transform.Rotate (new Vector3 (0, 0, 0));
-		if (!arrowFired)
-		{
-
-			transform.position = arrowAnchor.position;
-			transform.localEulerAngles = (camControll.planarRotationY);
-		}
+		
 		if (arrowFired)
 		{
 			ControlArrow ();
 		}
 	}
 
-
 	void FixedUpdate ()
 	{
-		//CurrentAngle = new Vector3 (transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
-
 		if (arrowFired && physicsMode)
 		{
 			transform.Translate (Vector3.forward.x * speed * Time.deltaTime, 0, Vector3.forward.z * speed * Time.deltaTime);
-		
 			ControlArrowXZ ();
-		
 		}
 
-		if (arrowFired && !physicsMode)
+		if (arrowFired && !physicsMode && !hitSomthing)
 		{
-			transform.localPosition += transform.forward * Time.deltaTime * speed;
+			transform.localPosition += transform.forward * Time.deltaTime * speed / 2;
 		}
 	}
 
@@ -82,18 +61,11 @@ public class ArrowController : MonoBehaviour
 	{
 		if (!arrowFired && physicsMode)
 		{
-			
 			//physics based
 			float forceY = Mathf.Abs ((force * 2) * Mathf.Sin (angle * Mathf.Deg2Rad));
 
-			Debug.Log ("force passed: " + force);
-			Debug.Log ("sin: " + Mathf.Sin (angle * Mathf.Deg2Rad));
-			Debug.Log ("y comp of force: " + forceY);
-
-			arrowRigid.isKinematic = false;
-			transform.SetParent (null); //makes the arrow independent of the camera movement
+			transform.SetParent (null); //makes the arrow independent of the Player
 			arrowRigid.AddForce (Vector3.up * forceY); //fires the arrow straight up
-
 
 			//non physics based
 			float forceX = Mathf.Abs (force * Mathf.Cos (angle * Mathf.Deg2Rad));
@@ -105,79 +77,51 @@ public class ArrowController : MonoBehaviour
 
 		if (!arrowFired && !physicsMode)
 		{
+			playerControll.GoToArrowMode ();
+			transform.SetParent (null); //makes the arrow independent of the Player
 			arrowFired = true;
 		}
-
 	}
 
 	void OnCollisionEnter (Collision other)
 	{
 		arrowRigid.isKinematic = true; //when the arrow hits somthing, make it freeze in the air. Temp solution.
 		arrowFired = false;
+		hitSomthing = true;
+		playerControll.GoToTPMode ();
+
+		if (other.transform.tag == "Guard")
+		{
+			//transfer damage to guard
+		}
 	}
 
 	void ControlArrowXZ ()
 	{
-		if (Input.GetKey (KeyCode.A))
-		{
-			CurrentAngle = new Vector3 (
-				CurrentAngle.x,
-				Mathf.LerpAngle (CurrentAngle.y, MaxRotateRight.y, Time.deltaTime),
-				CurrentAngle.z);
 		
-			transform.eulerAngles = CurrentAngle;
-		}
-		if (Input.GetKey (KeyCode.D))
-		{
-			CurrentAngle = new Vector3 (
-				CurrentAngle.x,
-				Mathf.LerpAngle (CurrentAngle.y, MaxRotateLeft.y, Time.deltaTime),
-				CurrentAngle.z);
-
-			transform.eulerAngles = CurrentAngle;
-		}
 	}
 
 	void ControlArrow ()
 	{
-		if (Input.GetKey (KeyCode.A))
-		{
-			CurrentAngle = new Vector3 (
-				CurrentAngle.x,
-				Mathf.LerpAngle (CurrentAngle.y, MaxRotateRight.y, Time.deltaTime * 2),
-				CurrentAngle.z);
+		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
 
-			transform.eulerAngles = CurrentAngle;
-		}
-		if (Input.GetKey (KeyCode.D))
+		if (rotationX > 180)
 		{
-			CurrentAngle = new Vector3 (
-				CurrentAngle.x,
-				Mathf.LerpAngle (CurrentAngle.y, MaxRotateLeft.y, Time.deltaTime * 2),
-				CurrentAngle.z);
-
-			transform.eulerAngles = CurrentAngle;
+			rotationX -= 360;
 		}
-		if (Input.GetKey (KeyCode.W))
-		{
-			CurrentAngle = new Vector3 (
-				Mathf.LerpAngle (CurrentAngle.x, MaxRotateUp.x, Time.deltaTime * 2),
-				CurrentAngle.y,
-				CurrentAngle.z);
 
-			transform.eulerAngles = CurrentAngle;
-		}
-		if (Input.GetKey (KeyCode.S))
-		{
-			CurrentAngle = new Vector3 (
-				Mathf.LerpAngle (CurrentAngle.x, MaxRotateDown.x, Time.deltaTime * 2),
-				CurrentAngle.y,
-				CurrentAngle.z);
+		if (rotationX <= minimumX)
+			rotationX = minimumX;
 
-			transform.eulerAngles = CurrentAngle;
-		}
+		if (rotationX >= maximumX)
+			rotationX = maximumX;
+
+		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
+
+		transform.localEulerAngles = calcRotation;
 	}
-
-
 }
 	
