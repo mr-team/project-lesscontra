@@ -8,44 +8,37 @@ public class PlayerController : MonoBehaviour
 	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
-	public GameObject arrowMode;
-	public ArrowController arrowControll;
-	public CameraController FPCamControll;
+	public GameObject Arrow;
 
-	public GameObject arrow;
+	ArrowController arrowControll;
+	CameraController FPCamControll;
 
 	Player player;
 	Animator playerAnim;
-
 
 	//ClickToMove
 	NavMeshAgent navAgent;
 
 	public Vector3 targetPosition;
 
-	public bool isCrouching;
-	public bool isProne;
-	public bool isWalking;
-	public bool isRunning;
-	public bool isJumping;
+	bool isCrouching;
+	bool isProne;
+	bool isWalking;
+	bool isRunning;
+	bool isJumping;
 
 	float moveSpeed;
-
-	public float distFromWall;
-
+	float distFromWall;
 	float timer;
 
 	//FPMode
-	Camera FPCamera;
 	public bool FPModeActive;
-	public float minForce;
-	public float maxForce;
-
 	bool transitionToFPMode;
 	bool hasFiredArrow;
-	float fireForce;
 
-	//FPCameraControll
+	float minForce;
+	float maxForce;
+	float fireForce;
 
 	//ArrowMode
 	bool arrowModeActive;
@@ -55,21 +48,17 @@ public class PlayerController : MonoBehaviour
 		player = GetComponent<Player> ();
 		navAgent = GetComponent<NavMeshAgent> ();
 		playerAnim = GetComponent<Animator> ();
-		moveSpeed = player.walkSpeed;
-		FPCamera = GameObject.Find ("FPCamera").GetComponent<Camera> ();
+		FPCamControll = GetComponent<CameraController> ();
+		arrowControll = Arrow.GetComponent<ArrowController> ();
 
-		if (FPCamera == null)
-			Debug.LogError ("There is no FPMode camera on the player");
-		
+		moveSpeed = player.walkSpeed;
 		GoToTPMode ();
 		FPModeActive = false;
-
 	}
 
 	void Start ()
 	{
 		targetPosition = transform.position;
-
 	}
 
 	void Update ()
@@ -106,8 +95,6 @@ public class PlayerController : MonoBehaviour
 
 		if (FPModeActive)
 		{
-			
-
 			if (Input.GetMouseButton (0))
 			{
 				float modifyer = 300f;
@@ -122,29 +109,13 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-				arrowControll.FireArrow (fireForce, Mathf.Abs (FPCamControll.planarRotationX.x - 360f));
-			
+				//arrowControll.FireArrow (fireForce, Mathf.Abs (FPCamControll.planarRotationX.x - 360f));
+				arrowControll.FireArrow ();
 				fireForce = 0F;
 			}
 		}
 
 		HandleAnimation (); //handle animation transitions
-	}
-
-	void WASDMove ()
-	{
-		float moveX = Input.GetAxis ("Horizontal");
-		float movez = Input.GetAxis ("Vertical");
-		float Speed = player.walkSpeed;
-		float crouchSpeed = player.walkSpeed * 0.6f;
-
-		Vector3 dir = new Vector3 (moveX, 0, movez);
-
-		if (Input.GetKey (KeyCode.LeftShift))
-		{
-			Speed = crouchSpeed;
-		}
-		transform.localPosition += dir * Speed * Time.deltaTime;
 	}
 
 	public void ClickToMove ()
@@ -343,7 +314,7 @@ public class PlayerController : MonoBehaviour
 	{
 		FPMode.SetActive (true);
 		TPMode.SetActive (false);
-		arrowMode.SetActive (false);
+		Arrow.SetActive (false);
 
 		Cursor.visible = (false);
 		Cursor.lockState = CursorLockMode.Locked;
@@ -357,7 +328,7 @@ public class PlayerController : MonoBehaviour
 	{
 		TPMode.SetActive (true);
 		FPMode.SetActive (false);
-		arrowMode.SetActive (false);
+		Arrow.SetActive (false);
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
@@ -368,7 +339,7 @@ public class PlayerController : MonoBehaviour
 
 	public void GoToArrowMode ()
 	{
-		arrowMode.SetActive (true);
+		Arrow.SetActive (true);
 		TPMode.SetActive (false);
 		FPMode.SetActive (false);
 

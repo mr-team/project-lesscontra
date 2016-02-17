@@ -4,17 +4,15 @@ using System.Collections;
 [RequireComponent (typeof(Rigidbody))]
 public class ArrowController : MonoBehaviour
 {
-	public CameraController camControll;
 	Arrow arrow;
-	Transform standardRotate;
 	Rigidbody arrowRigid;
 	PlayerController playerControll;
+
 	public bool arrowFired;
 
 	bool hitSomthing;
 
 	float speed = 10f;
-	float lerpSpeed;
 
 	public float sensitivityX;
 	public float sensitivityY;
@@ -25,7 +23,8 @@ public class ArrowController : MonoBehaviour
 	float rotationX;
 	float rotationY;
 
-	public bool physicsMode;
+	bool physicsMode;
+	bool reset;
 
 	void Awake ()
 	{
@@ -36,28 +35,28 @@ public class ArrowController : MonoBehaviour
 
 	void Update ()
 	{
-		
 		if (arrowFired)
 		{
 			ControlArrow ();
+
 		}
 	}
 
 	void FixedUpdate ()
 	{
-		if (arrowFired && physicsMode)
+		/*if (arrowFired && physicsMode)
 		{
 			transform.Translate (Vector3.forward.x * speed * Time.deltaTime, 0, Vector3.forward.z * speed * Time.deltaTime);
 			ControlArrowXZ ();
-		}
+		}*/
 
 		if (arrowFired && !physicsMode && !hitSomthing)
 		{
-			transform.localPosition += transform.forward * Time.deltaTime * speed / 2;
+			//transform.localPosition = transform.forward * Time.deltaTime * speed / 2;
 		}
 	}
 
-	public void FireArrow (float force, float angle)
+	/*public void FireArrow (float force, float angle)
 	{
 		if (!arrowFired && physicsMode)
 		{
@@ -74,13 +73,13 @@ public class ArrowController : MonoBehaviour
 		
 			arrowFired = true;
 		}
+	}*/
 
-		if (!arrowFired && !physicsMode)
-		{
-			playerControll.GoToArrowMode ();
-			transform.SetParent (null); //makes the arrow independent of the Player
-			arrowFired = true;
-		}
+	public void FireArrow ()
+	{
+		playerControll.GoToArrowMode ();
+		transform.SetParent (null); //makes the arrow independent of the Player
+		arrowFired = true;
 	}
 
 	void OnCollisionEnter (Collision other)
@@ -94,11 +93,6 @@ public class ArrowController : MonoBehaviour
 		{
 			//transfer damage to guard
 		}
-	}
-
-	void ControlArrowXZ ()
-	{
-		
 	}
 
 	void ControlArrow ()
@@ -116,7 +110,7 @@ public class ArrowController : MonoBehaviour
 		if (rotationX >= maximumX)
 			rotationX = maximumX;
 
-		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+		rotationY += transform.localEulerAngles.z + Input.GetAxis ("Mouse Y") * sensitivityY;
 		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 
 		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
