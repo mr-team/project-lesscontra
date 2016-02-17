@@ -8,11 +8,15 @@ public class PlayerController : MonoBehaviour
 	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
+<<<<<<< HEAD
 	public GameObject arrowMode;
 	public ArrowController arrowControll;
 	public CameraController FPCamControll;
 
 	public GameObject arrow;
+=======
+	public ArrowController arrowControll;
+>>>>>>> refs/remotes/mr-team/master
 
 	Player player;
 	Animator playerAnim;
@@ -47,8 +51,19 @@ public class PlayerController : MonoBehaviour
 
 	//FPCameraControll
 
+<<<<<<< HEAD
 	//ArrowMode
 	bool arrowModeActive;
+=======
+	public float sensitivityX = 15F;
+	public float sensitivityY = 15F;
+	public float minimumX = -360F;
+	public float maximumX = 360F;
+	public float minimumY = -60F;
+	public float maximumY = 60F;
+	float rotationY = 0F;
+	float rotationX = 0f;
+>>>>>>> refs/remotes/mr-team/master
 
 	void Awake ()
 	{
@@ -63,7 +78,10 @@ public class PlayerController : MonoBehaviour
 		
 		GoToTPMode ();
 		FPModeActive = false;
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/mr-team/master
 	}
 
 	void Start ()
@@ -93,6 +111,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.J) && FPModeActive)
+<<<<<<< HEAD
 		{
 			GoToTPMode ();
 
@@ -111,6 +130,26 @@ public class PlayerController : MonoBehaviour
 			if (Input.GetMouseButton (0))
 			{
 				float modifyer = 300f;
+=======
+		{
+			GoToTPMode ();
+
+		}
+			
+		if (Input.GetKeyDown (KeyCode.K) && !FPModeActive)
+		{
+			GoToFPMode ();
+
+		}
+
+		if (FPModeActive)
+		{
+			CamControll ();
+
+			if (Input.GetMouseButton (0))
+			{
+				float modifyer = 1500f;
+>>>>>>> refs/remotes/mr-team/master
 
 				fireForce += Time.deltaTime * modifyer;
 
@@ -122,8 +161,13 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
+<<<<<<< HEAD
 				arrowControll.FireArrow (fireForce, Mathf.Abs (FPCamControll.planarRotationX.x - 360f));
 			
+=======
+				arrowControll.FireArrow (fireForce);
+
+>>>>>>> refs/remotes/mr-team/master
 				fireForce = 0F;
 			}
 		}
@@ -343,26 +387,36 @@ public class PlayerController : MonoBehaviour
 	{
 		FPMode.SetActive (true);
 		TPMode.SetActive (false);
+<<<<<<< HEAD
 		arrowMode.SetActive (false);
+=======
+>>>>>>> refs/remotes/mr-team/master
 
 		Cursor.visible = (false);
 		Cursor.lockState = CursorLockMode.Locked;
 		arrowControll.gameObject.SetActive (true);
 
 		FPModeActive = true;
+<<<<<<< HEAD
 		arrowModeActive = false;
+=======
+>>>>>>> refs/remotes/mr-team/master
 	}
 
 	public void GoToTPMode ()
 	{
 		TPMode.SetActive (true);
 		FPMode.SetActive (false);
+<<<<<<< HEAD
 		arrowMode.SetActive (false);
+=======
+>>>>>>> refs/remotes/mr-team/master
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
 
 		FPModeActive = false;
+<<<<<<< HEAD
 		arrowModeActive = false;
 	}
 
@@ -377,5 +431,32 @@ public class PlayerController : MonoBehaviour
 
 		FPModeActive = false;
 		arrowModeActive = true;
+=======
+	}
+
+	//FPModeFunctions
+
+	void CamControll ()
+	{
+		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
+
+		if (rotationX > 180)
+		{
+			rotationX -= 360;
+		}
+
+		if (rotationX <= minimumX)
+			rotationX = minimumX;
+
+		if (rotationX >= maximumX)
+			rotationX = maximumX;
+
+		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
+
+		transform.localEulerAngles = calcRotation;
+>>>>>>> refs/remotes/mr-team/master
 	}
 }

@@ -160,6 +160,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 44134036}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
 --- !u!1 &211624446
 GameObject:
   m_ObjectHideFlags: 0
@@ -371,6 +372,8 @@ Transform:
   - {fileID: 673865214}
   m_Father: {fileID: 1348017002}
   m_RootOrder: 0
+=======
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &310436097
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,8 +399,13 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 310436097}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
   m_LocalPosition: {x: -1, y: 0, z: 101.3}
   m_LocalScale: {x: 15.14834, y: 15.148335, z: 15.148335}
+=======
+  m_LocalPosition: {x: 0, y: 0, z: 67.8}
+  m_LocalScale: {x: 5.196941, y: 5.19694, z: 5.19694}
+>>>>>>> refs/remotes/mr-team/master
   m_Children: []
   m_Father: {fileID: 1656077218}
   m_RootOrder: 0
@@ -801,6 +809,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 2
 --- !u!1 &673865208
 GameObject:
@@ -1084,6 +1093,9 @@ Camera:
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
   m_StereoMirrorMode: 0
+=======
+  m_RootOrder: 0
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &879627515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1203,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 880405779}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
 --- !u!1 &900616781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,6 +1233,8 @@ Transform:
   - {fileID: 1464302452}
   m_Father: {fileID: 211624452}
   m_RootOrder: 0
+=======
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &997557743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1246,7 +1261,11 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 5
+=======
+  m_RootOrder: 4
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &1058262351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,6 +1341,51 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1058262351}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+<<<<<<< HEAD
+=======
+--- !u!1001 &1135462580
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -15.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 6.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -1.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 456224, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 320013c3ea0ef5c499dd2e742e3a0bb0, type: 2}
+  m_IsPrefabParent: 0
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &1259967286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1503,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 88ec803cb55529446998d48389d51d1b, type: 2}
   m_IsPrefabParent: 0
+<<<<<<< HEAD
 --- !u!1 &1348017001
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,6 +1708,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1464302451}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+=======
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &1490263339
 GameObject:
   m_ObjectHideFlags: 0
@@ -1748,7 +1815,11 @@ Transform:
   - {fileID: 879627516}
   - {fileID: 1965874849}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 3
+=======
+  m_RootOrder: 2
+>>>>>>> refs/remotes/mr-team/master
 --- !u!1 &1708644683
 GameObject:
   m_ObjectHideFlags: 0
@@ -1881,4 +1952,8 @@ Transform:
   m_Children:
   - {fileID: 560333672}
   m_Father: {fileID: 0}
+<<<<<<< HEAD
   m_RootOrder: 4
+=======
+  m_RootOrder: 3
+>>>>>>> refs/remotes/mr-team/master
