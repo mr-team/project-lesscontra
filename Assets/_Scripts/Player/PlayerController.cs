@@ -8,86 +8,60 @@ public class PlayerController : MonoBehaviour
 	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
-<<<<<<< HEAD
-	public GameObject arrowMode;
-	public ArrowController arrowControll;
-	public CameraController FPCamControll;
 
-	public GameObject arrow;
-=======
-	public ArrowController arrowControll;
->>>>>>> refs/remotes/mr-team/master
+	public GameObject Arrow;
+
+	ArrowController arrowControll;
+	CameraController FPCamControll;
 
 	Player player;
 	Animator playerAnim;
-
 
 	//ClickToMove
 	NavMeshAgent navAgent;
 
 	public Vector3 targetPosition;
 
-	public bool isCrouching;
-	public bool isProne;
-	public bool isWalking;
-	public bool isRunning;
-	public bool isJumping;
+	bool isCrouching;
+	bool isProne;
+	bool isWalking;
+	bool isRunning;
+	bool isJumping;
 
 	float moveSpeed;
-
-	public float distFromWall;
-
+	float distFromWall;
 	float timer;
 
 	//FPMode
-	Camera FPCamera;
 	public bool FPModeActive;
-	public float minForce;
-	public float maxForce;
-
 	bool transitionToFPMode;
 	bool hasFiredArrow;
+
+	float minForce;
+	float maxForce;
 	float fireForce;
 
-	//FPCameraControll
 
-<<<<<<< HEAD
 	//ArrowMode
 	bool arrowModeActive;
-=======
-	public float sensitivityX = 15F;
-	public float sensitivityY = 15F;
-	public float minimumX = -360F;
-	public float maximumX = 360F;
-	public float minimumY = -60F;
-	public float maximumY = 60F;
-	float rotationY = 0F;
-	float rotationX = 0f;
->>>>>>> refs/remotes/mr-team/master
 
 	void Awake ()
 	{
 		player = GetComponent<Player> ();
 		navAgent = GetComponent<NavMeshAgent> ();
 		playerAnim = GetComponent<Animator> ();
-		moveSpeed = player.walkSpeed;
-		FPCamera = GameObject.Find ("FPCamera").GetComponent<Camera> ();
+		FPCamControll = GetComponent<CameraController> ();
+		arrowControll = Arrow.GetComponent<ArrowController> ();
 
-		if (FPCamera == null)
-			Debug.LogError ("There is no FPMode camera on the player");
-		
+		moveSpeed = player.walkSpeed;
 		GoToTPMode ();
 		FPModeActive = false;
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/remotes/mr-team/master
 	}
 
 	void Start ()
 	{
 		targetPosition = transform.position;
-
 	}
 
 	void Update ()
@@ -111,7 +85,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.J) && FPModeActive)
-<<<<<<< HEAD
+
 		{
 			GoToTPMode ();
 
@@ -125,31 +99,10 @@ public class PlayerController : MonoBehaviour
 
 		if (FPModeActive)
 		{
-			
-
 			if (Input.GetMouseButton (0))
 			{
 				float modifyer = 300f;
-=======
-		{
-			GoToTPMode ();
 
-		}
-			
-		if (Input.GetKeyDown (KeyCode.K) && !FPModeActive)
-		{
-			GoToFPMode ();
-
-		}
-
-		if (FPModeActive)
-		{
-			CamControll ();
-
-			if (Input.GetMouseButton (0))
-			{
-				float modifyer = 1500f;
->>>>>>> refs/remotes/mr-team/master
 
 				fireForce += Time.deltaTime * modifyer;
 
@@ -161,34 +114,14 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-<<<<<<< HEAD
-				arrowControll.FireArrow (fireForce, Mathf.Abs (FPCamControll.planarRotationX.x - 360f));
-			
-=======
-				arrowControll.FireArrow (fireForce);
 
->>>>>>> refs/remotes/mr-team/master
+				arrowControll.FireArrow ();
+
 				fireForce = 0F;
 			}
 		}
 
 		HandleAnimation (); //handle animation transitions
-	}
-
-	void WASDMove ()
-	{
-		float moveX = Input.GetAxis ("Horizontal");
-		float movez = Input.GetAxis ("Vertical");
-		float Speed = player.walkSpeed;
-		float crouchSpeed = player.walkSpeed * 0.6f;
-
-		Vector3 dir = new Vector3 (moveX, 0, movez);
-
-		if (Input.GetKey (KeyCode.LeftShift))
-		{
-			Speed = crouchSpeed;
-		}
-		transform.localPosition += dir * Speed * Time.deltaTime;
 	}
 
 	public void ClickToMove ()
@@ -387,42 +320,34 @@ public class PlayerController : MonoBehaviour
 	{
 		FPMode.SetActive (true);
 		TPMode.SetActive (false);
-<<<<<<< HEAD
-		arrowMode.SetActive (false);
-=======
->>>>>>> refs/remotes/mr-team/master
+		Arrow.SetActive (false);
 
 		Cursor.visible = (false);
 		Cursor.lockState = CursorLockMode.Locked;
 		arrowControll.gameObject.SetActive (true);
 
 		FPModeActive = true;
-<<<<<<< HEAD
 		arrowModeActive = false;
-=======
->>>>>>> refs/remotes/mr-team/master
+
+
 	}
 
 	public void GoToTPMode ()
 	{
 		TPMode.SetActive (true);
 		FPMode.SetActive (false);
-<<<<<<< HEAD
-		arrowMode.SetActive (false);
-=======
->>>>>>> refs/remotes/mr-team/master
+		Arrow.SetActive (false);
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
 
 		FPModeActive = false;
-<<<<<<< HEAD
 		arrowModeActive = false;
 	}
 
 	public void GoToArrowMode ()
 	{
-		arrowMode.SetActive (true);
+		Arrow.SetActive (true);
 		TPMode.SetActive (false);
 		FPMode.SetActive (false);
 
@@ -431,32 +356,8 @@ public class PlayerController : MonoBehaviour
 
 		FPModeActive = false;
 		arrowModeActive = true;
-=======
+
 	}
 
-	//FPModeFunctions
-
-	void CamControll ()
-	{
-		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
-
-		if (rotationX > 180)
-		{
-			rotationX -= 360;
-		}
-
-		if (rotationX <= minimumX)
-			rotationX = minimumX;
-
-		if (rotationX >= maximumX)
-			rotationX = maximumX;
-
-		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
-		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
-
-		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
-
-		transform.localEulerAngles = calcRotation;
->>>>>>> refs/remotes/mr-team/master
 	}
 }

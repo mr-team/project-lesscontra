@@ -3,8 +3,10 @@ using System.Collections;
 
 public class CameraController : MonoBehaviour
 {
-	public Vector3 planarRotationY;
-	public Vector3 planarRotationX;
+	public Transform FPModeAnchor;
+	public Transform FPModePlane;
+
+	PlayerController playerControll;
 
 	public float sensitivityX = 15F;
 	public float sensitivityY = 15F;
@@ -15,16 +17,36 @@ public class CameraController : MonoBehaviour
 	float rotationY = 0F;
 	float rotationX = 0f;
 
-	void Update ()
+	void Awake ()
 	{
-		CamControll ();
+		playerControll = GetComponent<PlayerController> ();
+
 	}
 
-	void CamControll ()
+	void Update ()
 	{
-		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
+		if (playerControll.FPModeActive)
+		{
+			RotateAnchor ();
+			RotateInPlane ();
+		} else
+			ResetRotation ();
+	}
 
-		planarRotationY = new Vector3 (0, rotationX, 0);
+	void RotateAnchor ()
+	{
+		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
+		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+		Vector3 calcRotation = new Vector3 (-rotationY, 0, 0);
+
+		FPModeAnchor.localEulerAngles = calcRotation;
+
+	}
+
+	void RotateInPlane ()
+	{
+		rotationX = FPModePlane.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
 
 		if (rotationX > 180)
 		{
@@ -37,13 +59,16 @@ public class CameraController : MonoBehaviour
 		if (rotationX >= maximumX)
 			rotationX = maximumX;
 
-		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
-		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+		Vector3 calcRotation = new Vector3 (0, rotationX, 0);
 
-		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
-		planarRotationX = new Vector3 (-rotationY, 0, 0);
+		FPModePlane.localEulerAngles = calcRotation;
 
-		transform.localEulerAngles = calcRotation;
+	}
 
+	void ResetRotation ()
+	{
+		rotationY = 0f;
+		FPModeAnchor.localEulerAngles = new Vector3 (0, 0, 0);
+		FPModePlane.localEulerAngles = new Vector3 (0, 0, 0);
 	}
 }
