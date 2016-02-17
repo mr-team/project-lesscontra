@@ -39,10 +39,10 @@ public class ArrowController : MonoBehaviour
 
 	void Update ()
 	{
-
-		ControlArrow ();
-
-		
+		if (arrowFired)
+		{
+			ControlArrow ();
+		}
 	}
 
 
@@ -103,7 +103,6 @@ public class ArrowController : MonoBehaviour
 		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
 
 		transform.localEulerAngles = calcRotation;
-
 	}
 }
 	

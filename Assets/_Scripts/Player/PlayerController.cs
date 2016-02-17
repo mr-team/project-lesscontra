@@ -8,12 +8,14 @@ public class PlayerController : MonoBehaviour
 	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
-
 	public GameObject Arrow;
+
+	public GameController gameControll;
 
 	ArrowController arrowControll;
 	CameraController FPCamControll;
 
+	UIFeedBack UIfeedBack;
 	Player player;
 	Animator playerAnim;
 
@@ -52,7 +54,6 @@ public class PlayerController : MonoBehaviour
 		playerAnim = GetComponent<Animator> ();
 		FPCamControll = GetComponent<CameraController> ();
 		arrowControll = Arrow.GetComponent<ArrowController> ();
-
 		moveSpeed = player.walkSpeed;
 		GoToTPMode ();
 		FPModeActive = false;
@@ -73,10 +74,10 @@ public class PlayerController : MonoBehaviour
 
 		if (Input.GetMouseButton (0) && !FPModeActive)
 		{
-			if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground
+			if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground...
 			{
-				SetTargetPosition (CheckClickedLayer ()); 	//set the target position to the clicket point
-				ClickToMove ();		//move the player to the clicked point
+				SetTargetPosition (CheckClickedLayer ()); 	//...set the target position to the clicket point, and...
+				ClickToMove ();		//..move the player to the clicked point
 
 			} else if (CheckClickedLayer () == 10) 		//if the clicked layer was a scalable wall
 			{
@@ -84,25 +85,25 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.J) && FPModeActive)
-
+		if (Input.GetKeyDown (KeyCode.Space))
 		{
-			GoToTPMode ();
-
+			if (FPModeActive)
+			{
+				GoToTPMode ();
+				return;
+			}
+				
+			if (!FPModeActive)
+			{
+				GoToFPMode ();
+			}
 		}
 			
-		if (Input.GetKeyDown (KeyCode.K) && !FPModeActive)
-		{
-			GoToFPMode ();
-
-		}
-
 		if (FPModeActive)
 		{
 			if (Input.GetMouseButton (0))
 			{
 				float modifyer = 300f;
-
 
 				fireForce += Time.deltaTime * modifyer;
 
@@ -171,6 +172,8 @@ public class PlayerController : MonoBehaviour
 				if (hit.transform.gameObject.layer == 8) //if it hit an object in the ground layer
 					targetPosition = hit.point; //get the point where ray hit the object
 			}
+			Debug.Log ("hei i came to this point");
+			gameControll.CallUI_WalkPoint (targetPosition);
 		}
 	}
 
@@ -188,6 +191,7 @@ public class PlayerController : MonoBehaviour
 				if (hit.transform.gameObject.layer == 8)
 					targetPosition = hit.point;
 			}
+
 		}
 		if (layer == 10)
 		{
@@ -356,8 +360,6 @@ public class PlayerController : MonoBehaviour
 
 		FPModeActive = false;
 		arrowModeActive = true;
-
-	}
 
 	}
 }
