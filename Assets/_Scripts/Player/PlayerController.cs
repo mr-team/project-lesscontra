@@ -8,69 +8,60 @@ public class PlayerController : MonoBehaviour
 	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
-	public ArrowController arrowControll;
+
+	public GameObject Arrow;
+
+	ArrowController arrowControll;
+	CameraController FPCamControll;
 
 	Player player;
 	Animator playerAnim;
-
 
 	//ClickToMove
 	NavMeshAgent navAgent;
 
 	public Vector3 targetPosition;
 
-	public bool isCrouching;
-	public bool isProne;
-	public bool isWalking;
-	public bool isRunning;
-	public bool isJumping;
+	bool isCrouching;
+	bool isProne;
+	bool isWalking;
+	bool isRunning;
+	bool isJumping;
 
 	float moveSpeed;
-
-	public float distFromWall;
-
+	float distFromWall;
 	float timer;
 
 	//FPMode
-	Camera FPCamera;
 	public bool FPModeActive;
-	public float minForce;
-	public float maxForce;
-
 	bool transitionToFPMode;
 	bool hasFiredArrow;
+
+	float minForce;
+	float maxForce;
 	float fireForce;
 
-	//FPCameraControll
 
-	public float sensitivityX = 15F;
-	public float sensitivityY = 15F;
-	public float minimumX = -360F;
-	public float maximumX = 360F;
-	public float minimumY = -60F;
-	public float maximumY = 60F;
-	float rotationY = 0F;
-	float rotationX = 0f;
+	//ArrowMode
+	bool arrowModeActive;
 
 	void Awake ()
 	{
 		player = GetComponent<Player> ();
 		navAgent = GetComponent<NavMeshAgent> ();
 		playerAnim = GetComponent<Animator> ();
-		moveSpeed = player.walkSpeed;
-		FPCamera = GameObject.Find ("FPCamera").GetComponent<Camera> ();
+		FPCamControll = GetComponent<CameraController> ();
+		arrowControll = Arrow.GetComponent<ArrowController> ();
 
-		if (FPCamera == null)
-			Debug.LogError ("There is no FPMode camera on the player");
-		
+		moveSpeed = player.walkSpeed;
 		GoToTPMode ();
 		FPModeActive = false;
+
 	}
 
 	void Start ()
 	{
 		targetPosition = transform.position;
-
 	}
 
 	void Update ()
@@ -94,6 +85,7 @@ public class PlayerController : MonoBehaviour
 		}
 
 		if (Input.GetKeyDown (KeyCode.J) && FPModeActive)
+
 		{
 			GoToTPMode ();
 
@@ -107,11 +99,10 @@ public class PlayerController : MonoBehaviour
 
 		if (FPModeActive)
 		{
-			CamControll ();
-
 			if (Input.GetMouseButton (0))
 			{
-				float modifyer = 1500f;
+				float modifyer = 300f;
+
 
 				fireForce += Time.deltaTime * modifyer;
 
@@ -123,29 +114,14 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-				arrowControll.FireArrow (fireForce);
+
+				arrowControll.FireArrow ();
 
 				fireForce = 0F;
 			}
 		}
 
 		HandleAnimation (); //handle animation transitions
-	}
-
-	void WASDMove ()
-	{
-		float moveX = Input.GetAxis ("Horizontal");
-		float movez = Input.GetAxis ("Vertical");
-		float Speed = player.walkSpeed;
-		float crouchSpeed = player.walkSpeed * 0.6f;
-
-		Vector3 dir = new Vector3 (moveX, 0, movez);
-
-		if (Input.GetKey (KeyCode.LeftShift))
-		{
-			Speed = crouchSpeed;
-		}
-		transform.localPosition += dir * Speed * Time.deltaTime;
 	}
 
 	public void ClickToMove ()
@@ -166,8 +142,6 @@ public class PlayerController : MonoBehaviour
 		{
 			moveSpeed = player.proneSpeed;
 		}
-		 
-		Debug.Log (targetPosition);
 
 		navAgent.speed = moveSpeed;
 		navAgent.SetDestination (targetPosition);
@@ -346,47 +320,44 @@ public class PlayerController : MonoBehaviour
 	{
 		FPMode.SetActive (true);
 		TPMode.SetActive (false);
+		Arrow.SetActive (false);
 
 		Cursor.visible = (false);
 		Cursor.lockState = CursorLockMode.Locked;
 		arrowControll.gameObject.SetActive (true);
 
 		FPModeActive = true;
+		arrowModeActive = false;
+
+
 	}
 
 	public void GoToTPMode ()
 	{
 		TPMode.SetActive (true);
 		FPMode.SetActive (false);
+		Arrow.SetActive (false);
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
 
 		FPModeActive = false;
+		arrowModeActive = false;
 	}
 
-	//FPModeFunctions
-
-	void CamControll ()
+	public void GoToArrowMode ()
 	{
-		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
+		Arrow.SetActive (true);
+		TPMode.SetActive (false);
+		FPMode.SetActive (false);
 
-		if (rotationX > 180)
-		{
-			rotationX -= 360;
-		}
+		Cursor.visible = (true);
+		Cursor.lockState = CursorLockMode.None;
 
-		if (rotationX <= minimumX)
-			rotationX = minimumX;
+		FPModeActive = false;
+		arrowModeActive = true;
 
-		if (rotationX >= maximumX)
-			rotationX = maximumX;
+	}
 
-		rotationY += Input.GetAxis ("Mouse Y") * sensitivityY;
-		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
-
-		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
-
-		transform.localEulerAngles = calcRotation;
 	}
 }
