@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-
 				arrowControll.FireArrow ();
 
 				fireForce = 0F;
@@ -172,7 +171,6 @@ public class PlayerController : MonoBehaviour
 				if (hit.transform.gameObject.layer == 8) //if it hit an object in the ground layer
 					targetPosition = hit.point; //get the point where ray hit the object
 			}
-			Debug.Log ("hei i came to this point");
 			gameControll.CallUI_WalkPoint (targetPosition);
 		}
 	}
@@ -191,7 +189,6 @@ public class PlayerController : MonoBehaviour
 				if (hit.transform.gameObject.layer == 8)
 					targetPosition = hit.point;
 			}
-
 		}
 		if (layer == 10)
 		{
