@@ -4,19 +4,18 @@ using System.Collections;
 [RequireComponent (typeof(Rigidbody))]
 public class ArrowController : MonoBehaviour
 {
-	Transform standardRotate;
+
+	public CameraController camControll;
+
+	Arrow arrow;
 	Rigidbody arrowRigid;
+	PlayerController playerControll;
 
 	public bool arrowFired;
 
-	Vector3 startRotation;
-	Vector3 calcRotation;
-	Vector3 Velocity;
-	Vector3 newVelocityDir;
+	bool hitSomthing;
 
-	float speed;
-	float lerpSpeed;
-	float force;
+	float speed = 10f;
 
 	public float sensitivityX;
 	public float sensitivityY;
@@ -27,37 +26,60 @@ public class ArrowController : MonoBehaviour
 	float rotationX;
 	float rotationY;
 
+	bool physicsMode;
+	bool reset;
+
 	void Awake ()
 	{
 		arrowRigid = gameObject.GetComponent<Rigidbody> (); //find the arrows rigidbody
-		arrowRigid.isKinematic = true; //makes sure the arrow does not fall to the ground before it is fired
-	}
+		arrow = GetComponent<Arrow> ();
+		playerControll = GameObject.Find ("Player").GetComponent<PlayerController> ();
 
+	}
 
 	void Update ()
 	{
-		if (arrowFired)
-		{
-			Velocity = arrowRigid.velocity;
-			transform.forward = Vector3.Slerp (transform.forward, arrowRigid.velocity.normalized, Time.deltaTime * 2f); //point the arrow in the direction of the velocity
-			ControlArrow ();
-		}
+
+		ControlArrow ();
+
+		
 	}
 
-	public void FireArrow (float force)
+
+	void FixedUpdate ()
 	{
-		arrowRigid.isKinematic = false; //the arrow is now handeled by the physics engine
-		transform.SetParent (null); //makes the arrow independent of the camera movement
-		arrowRigid.AddRelativeForce (Vector3.forward * force); //fires the arrow in the arrows relative forward direction
+		/*if (arrowFired && physicsMode)
+		{
+			transform.Translate (Vector3.forward.x * speed * Time.deltaTime, 0, Vector3.forward.z * speed * Time.deltaTime);
+			ControlArrowXZ ();
+		}*/
+
+		if (arrowFired && !physicsMode && !hitSomthing)
+		{
+			//transform.localPosition = transform.forward * Time.deltaTime * speed / 2;
+		}
+
+	}
+
+	public void FireArrow ()
+	{
+		playerControll.GoToArrowMode ();
+		transform.SetParent (null); //makes the arrow independent of the Player
 		arrowFired = true;
-		startRotation = transform.localEulerAngles;
-		Debug.Log ("the startRotation is: " + startRotation);
+
 	}
 
 	void OnCollisionEnter (Collision other)
 	{
 		arrowRigid.isKinematic = true; //when the arrow hits somthing, make it freeze in the air. Temp solution.
+		arrowFired = false;
+		hitSomthing = true;
+		playerControll.GoToTPMode ();
 
+		if (other.transform.tag == "Guard")
+		{
+			//transfer damage to guard
+		}
 	}
 
 	void ControlArrow ()
@@ -75,13 +97,13 @@ public class ArrowController : MonoBehaviour
 		if (rotationX >= maximumX)
 			rotationX = maximumX;
 
-		Vector3 calcRotation = new Vector3 (startRotation.x * -rotationY, startRotation.y * rotationX, startRotation.z);
+		rotationY += transform.localEulerAngles.z + Input.GetAxis ("Mouse Y") * sensitivityY;
+		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
 
-		Debug.Log ("velocity before modify: " + arrowRigid.velocity);
+		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
 
-		arrowRigid.velocity = new Vector3 ((arrowRigid.velocity.x * calcRotation.x), arrowRigid.velocity.y, arrowRigid.velocity.z);
+		transform.localEulerAngles = calcRotation;
 
-		Debug.Log ("velocity after modify: " + arrowRigid.velocity);
 	}
 }
 	
