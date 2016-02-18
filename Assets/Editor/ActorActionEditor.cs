@@ -2,22 +2,22 @@
 using System.Collections;
 using UnityEditor;
 
-[CustomEditor (typeof(GuardController))]
-public class WalkingEditor : Editor
+[CustomEditor (typeof(NPC_Generic))]
+public class ActorActionEditor : Editor
 {
 
-	/*private Vector3 minVector = new Vector3 (float.MinValue, float.MinValue, float.MinValue);
+	private Vector3 minVector = new Vector3 (float.MinValue, float.MinValue, float.MinValue);
 
 	void OnSceneGUI ()
 	{
-		GuardController master = (GuardController)target;
-		Vector3 lastPos = master.guardActions [master.guardActions.Count - 1].walkToPoint != minVector ?
-                            master.guardActions [master.guardActions.Count - 1].walkToPoint : master.GetComponent<Transform> ().position;
-		if (master.guardActions.Count == 0)
+		Actor master = (Actor)target;
+		Vector3 lastPos = master.actorActions [master.actorActions.Count - 1].walkToPoint != minVector ?
+			master.actorActions [master.actorActions.Count - 1].walkToPoint : master.GetComponent<Transform> ().position;
+		if (master.actorActions.Count == 0)
 			return;
-		for (int i = 0; i < master.guardActions.Count; i++)
+		for (int i = 0; i < master.actorActions.Count; i++)
 		{
-			GuardController.NPCAction current = master.guardActions [i];
+			Actor.NPCAction current = master.actorActions [i];
 			if (current.name == "Walking")
 			{
 				Handles.color = Color.green;
@@ -37,17 +37,17 @@ public class WalkingEditor : Editor
 
 	public override void OnInspectorGUI ()
 	{
-		GuardController master = (GuardController)target;
+		Actor master = (Actor)target;
 		DrawDefaultInspector ();
 		bool dontUpdate = false;
-		for (int i = 0; i < master.guardActions.Count; i++)
+		for (int i = 0; i < master.actorActions.Count; i++)
 		{
 			EditorGUILayout.BeginHorizontal ();
-			GuardController.NPCAction current = master.guardActions [i];
+			Actor.NPCAction current = master.actorActions [i];
 			EditorGUILayout.LabelField ((i + 1) + ". " + current.name);
 			if (GUILayout.Button ("-", GUILayout.MaxWidth (20), GUILayout.MaxHeight (20)))
 			{
-				master.guardActions.Remove (current);
+				master.actorActions.Remove (current);
 				dontUpdate = true;
 			}
 			EditorGUILayout.EndHorizontal ();
@@ -71,18 +71,17 @@ public class WalkingEditor : Editor
 			EditorGUILayout.EndHorizontal ();
 			GUILayout.Label ("");
 			if (!dontUpdate)
-				master.guardActions [i] = current;
+				master.actorActions [i] = current;
 		}
 		if (GUILayout.Button ("Walk point"))
 		{
 			Vector3 point = master.transform.position;
-			master.guardActions.Add (new GuardController.NPCAction (point));
+			master.actorActions.Add (new Actor.NPCAction (point));
 		}
 		if (GUILayout.Button ("Animation"))
 		{
-			master.guardActions.Add (new GuardController.NPCAction (new Animator ()));
+			master.actorActions.Add (new Actor.NPCAction (new Animator ()));
 		}
 		EditorUtility.SetDirty (target);
-	}*/
-
+	}
 }

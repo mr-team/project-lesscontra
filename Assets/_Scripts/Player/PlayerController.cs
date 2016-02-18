@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 	NavMeshAgent navAgent;
 
 	public Vector3 targetPosition;
+	Vector3 lastTargetPos;
 
 	bool isCrouching;
 	bool isProne;
@@ -57,7 +58,6 @@ public class PlayerController : MonoBehaviour
 		moveSpeed = player.walkSpeed;
 		GoToTPMode ();
 		FPModeActive = false;
-
 	}
 
 	void Start ()
@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 		if (shouldCameraFollowPlayer && !FPModeActive)
-			Camera.main.transform.position = new Vector3 (this.transform.position.x - 15f, 30f, this.transform.position.z - 15f);
+			Camera.main.transform.position = new Vector3 (this.transform.position.x, 30f, this.transform.position.z);
 		
 		ChangeState (); 	//Update the movement state of the player
 
@@ -85,6 +85,25 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
+		if (Input.GetMouseButtonDown (0) && !FPModeActive)
+		{
+			if (CheckClickedLayer () == 8)
+			{
+				lastTargetPos = targetPosition;
+				gameControll.CallUI_WalkPoint (targetPosition);
+
+			}
+		}
+
+		if (Input.GetMouseButtonUp (0) && !FPModeActive && targetPosition != lastTargetPos)
+		{
+			if (CheckClickedLayer () == 8)
+			{	
+				
+				gameControll.CallUI_WalkPoint (targetPosition);
+			}
+		}
+			
 		if (Input.GetKeyDown (KeyCode.Space))
 		{
 			if (FPModeActive)
@@ -154,16 +173,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (layer == 8)
 		{
-			/*Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
-			Plane plane = new Plane (Vector3.up, mousePos); //creates a flat plane with a normal up, at the point of the player STUPID!
-
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); //creates a ray from camerea throug mouse pointer
-			float point = 0f;
-
-			if (plane.Raycast (ray, out point)) //is the ray intercepts the plane return its point 
-				targetPosition = ray.GetPoint (point);	//store the point in a vector 3*/
-
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit)) //if the raycast hit somthing
@@ -171,7 +180,6 @@ public class PlayerController : MonoBehaviour
 				if (hit.transform.gameObject.layer == 8) //if it hit an object in the ground layer
 					targetPosition = hit.point; //get the point where ray hit the object
 			}
-			gameControll.CallUI_WalkPoint (targetPosition);
 		}
 	}
 
@@ -180,16 +188,6 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	void SetTargetPosition (int layer, Transform clickedTransform)
 	{
-		if (layer == 8)
-		{
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit))
-			{
-				if (hit.transform.gameObject.layer == 8)
-					targetPosition = hit.point;
-			}
-		}
 		if (layer == 10)
 		{
 			MoveToWall (clickedTransform);
