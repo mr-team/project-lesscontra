@@ -15,7 +15,7 @@ public class Guard : Actor, IKillable
 
 	public void Kill ()
 	{
-		if (health <= 0)
+		if (stats.health <= 0)
 			Destroy (gameObject);
 	}
 

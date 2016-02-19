@@ -1,27 +1,41 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 [RequireComponent (typeof(NpcController))]
-public class Actor : MonoBehaviour
+
+[Serializable]
+public class ActorAtributes
 {
-	public List<NPCAction> actorActions = new List<NPCAction> ();
-	protected NpcController actorControll;
-	protected Test_DialougeScript dialouge;
-
 	public string actorName;
-
 	public bool isHostile = false;
 	public bool isQuestGiver = false;
 	public bool isEssential = false;
 	public bool hasDialouge = false;
 	public bool isMerchant = false;
 	public bool isSkillMaster = false;
+}
 
-	protected float health;
-
+[Serializable]
+public class ActorStats
+{
+	public float health;
 	public float walkSpeed = 1.5f;
 	public float turnSpeed = 2f;
+
+}
+
+public class Actor : MonoBehaviour
+{
+	
+	public ActorAtributes atributes;
+	public ActorStats stats;
+
+	public List<NPCAction> actorActions = new List<NPCAction> ();
+	protected NpcController actorControll;
+	[HideInInspector]
+	public DialogueSystem dialouge;
 
 	protected int onCurrentAction = 0;
 	protected float waitTimer = 0f;
@@ -32,17 +46,18 @@ public class Actor : MonoBehaviour
 
 	protected virtual void Awake ()
 	{
-		if (isHostile)
+		if (atributes.isHostile)
 		{
-			isQuestGiver = false;
-			isEssential = false;
-			hasDialouge = false;
-			isMerchant = false;
-			isSkillMaster = false;
+			atributes.isQuestGiver = false;
+			atributes.isEssential = false;
+			atributes.hasDialouge = false;
+			atributes.isMerchant = false;
+			atributes.isSkillMaster = false;
 
 		} 
-		if (isMerchant)
-			isSkillMaster = false;
+		if (atributes.isMerchant)
+			atributes.isSkillMaster = false;
+		
 
 		actorControll = GetComponent<NpcController> ();
 		CheckSetup ();
@@ -50,18 +65,16 @@ public class Actor : MonoBehaviour
 
 	void CheckSetup ()
 	{
-		if (actorName == "")
+		if (atributes.actorName == "")
 			Debug.LogError ("The actor " + gameObject + " has no name");
 		
 		if (actorControll == null)
 			Debug.LogError ("The actor " + gameObject + " has not controller");
+		
+		if (atributes.hasDialouge)
+			dialouge = GetComponent<DialogueSystem> ();
 
-		if (hasDialouge)
-		{
-			gameObject.AddComponent<Test_DialougeScript> ();
-			dialouge = GetComponent<Test_DialougeScript> ();
-		}
-		if (isMerchant)
+		if (atributes.isMerchant)
 		{
 			
 		}
@@ -115,8 +128,8 @@ public class Actor : MonoBehaviour
 			{
 				_direction = (action.walkToPoint - transform.position).normalized;
 				_lookRotation = Quaternion.LookRotation (_direction);
-				transform.rotation = Quaternion.Slerp (transform.rotation, _lookRotation, Time.fixedDeltaTime * turnSpeed);
-				transform.position = Vector3.MoveTowards (transform.position, action.walkToPoint, Time.fixedDeltaTime * walkSpeed);
+				transform.rotation = Quaternion.Slerp (transform.rotation, _lookRotation, Time.fixedDeltaTime * stats.turnSpeed);
+				transform.position = Vector3.MoveTowards (transform.position, action.walkToPoint, Time.fixedDeltaTime * stats.walkSpeed);
 			} else
 			{
 				waitTimer += Time.fixedDeltaTime;

@@ -1036,8 +1036,9 @@ GameObject:
   - 23: {fileID: 110629284}
   - 114: {fileID: 110629283}
   - 114: {fileID: 110629282}
+  - 114: {fileID: 110629288}
   m_Layer: 11
-  m_Name: NPC_Test
+  m_Name: Dankfart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1054,21 +1055,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5e6206535f9c74ea66fb1a82bbc2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  atributes:
+    actorName: Dankfart
+    isHostile: 0
+    isQuestGiver: 0
+    isEssential: 0
+    hasDialouge: 1
+    isMerchant: 0
+    isSkillMaster: 0
+  stats:
+    health: 0
+    walkSpeed: 1.5
+    turnSpeed: 2
   actorActions:
+  - wait: 12.57
+    walkToPoint: {x: -3.4028235e+38, y: -3.4028235e+38, z: -3.4028235e+38}
+    runAnimation: {fileID: 0}
+    whatAnimation: 0
+    name: Animation
+  - wait: 1
+    walkToPoint: {x: 4.297, y: 3.299, z: 8.763}
+    runAnimation: {fileID: 0}
+    whatAnimation: 0
+    name: Walking
+  - wait: 1
+    walkToPoint: {x: 4.297, y: 3.299, z: 8.763}
+    runAnimation: {fileID: 0}
+    whatAnimation: 0
+    name: Walking
   - wait: 1
     walkToPoint: {x: -3.4028235e+38, y: -3.4028235e+38, z: -3.4028235e+38}
     runAnimation: {fileID: 0}
     whatAnimation: 0
     name: Animation
-  actorName: Dankfart Gudheim
-  isHostile: 0
-  isQuestGiver: 0
-  isEssential: 0
-  hasDialouge: 1
-  isMerchant: 0
-  isSkillMaster: 0
-  walkSpeed: 2.5
-  turnSpeed: 2
+  dialouge: {fileID: 0}
 --- !u!114 &110629283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1138,6 +1158,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+--- !u!114 &110629288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 110629281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8cd78742bfdb184a8ee9e3e37993510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialougeCanvas: {fileID: 0}
+  dialougeText:
+  - hello mi friend i am dankfart
+  - fuck you !
+  active: 0
+  goToNextWindow: 0
 --- !u!1001 &135963660
 Prefab:
   m_ObjectHideFlags: 0
@@ -10475,11 +10512,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054a3515a43837442bb4e91ff3cfac87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  referances:
+    TPMode: {fileID: 1534576888}
+    FPMode: {fileID: 926065587}
+    Arrow: {fileID: 682625981}
+    gameControll: {fileID: 2105572944}
   shouldCameraFollowPlayer: 0
-  TPMode: {fileID: 1534576888}
-  FPMode: {fileID: 926065587}
-  Arrow: {fileID: 682625981}
-  gameControll: {fileID: 2105572944}
   targetPosition: {x: 0, y: 0, z: 0}
   FPModeActive: 0
 --- !u!114 &1762033458
@@ -10494,10 +10532,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ba3c1149a2db346bebf91e0b27d60c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 5
-  walkSpeed: 2.5
-  crouchSpeed: 1
-  proneSpeed: 0.8
+  stats:
+    runSpeed: 5
+    walkSpeed: 2.5
+    crouchSpeed: 1
+    proneSpeed: 0.8
 --- !u!195 &1762033459
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11457,6 +11496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f9d08075dc6b444b7899a5ed11569e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialougeCanvas: {fileID: 963584945}
   UIObject: {fileID: 1599514381}
   player: {fileID: 1762033456}
 --- !u!4 &2105572945

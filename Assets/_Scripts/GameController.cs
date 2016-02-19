@@ -4,6 +4,8 @@ using System;
 
 public class GameController : MonoBehaviour
 {
+
+	public Canvas dialougeCanvas;
 	public GameObject UIObject;
 	public GameObject player;
 
@@ -18,6 +20,7 @@ public class GameController : MonoBehaviour
 		playerControll = player.GetComponent<PlayerController> ();
 
 		CallUI_WalkPoint = UIfeedBack.WalkPointAnim;
+		dialougeCanvas.gameObject.SetActive (false);
 	}
 
 	void Update ()

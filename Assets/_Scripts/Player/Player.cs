@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
-
-public class Player : MonoBehaviour
+[Serializable]
+public class PlayerStats
 {
-	static Player player;
-
 	public float runSpeed;
 	public float walkSpeed;
 	public float crouchSpeed;
 	public float proneSpeed;
+}
+
+public class Player : MonoBehaviour
+{
+	public PlayerStats stats;
+	static Player player;
 
 	void Start ()
 	{

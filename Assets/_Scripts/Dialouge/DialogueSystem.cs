@@ -3,39 +3,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class Test_DialougeScript : MonoBehaviour
+public class DialogueSystem : MonoBehaviour
 {
-	public Canvas dialougeCanvas;
+	[HideInInspector]
+	public Canvas dialogueCanvas;
 	Text canvasText;
-	
-	public List<string> dialougeText;
+
+	[HideInInspector]
+	public List<string> dialogueText = new List<string> ();
 	string currentDialWindow;
 
+	[HideInInspector]
 	public bool active;
+	[HideInInspector]
 	public bool goToNextWindow;
 	bool isTalking;
 	bool initialise = true;
 	bool endDialouge;
 
-	int i = 0;
+	int i = 1;
 
 	void Awake ()
 	{	
-		dialougeText = new List<string> ();
-		DebugAddText ();
-		dialougeCanvas = GameObject.Find ("DialougeCanvas").GetComponent<Canvas> ();
-		canvasText = dialougeCanvas.GetComponentInChildren<Text> ();
+		dialogueCanvas = GameObject.Find ("DialougeCanvas").GetComponent<Canvas> ();
+		canvasText = dialogueCanvas.GetComponentInChildren<Text> ();
 
-		dialougeCanvas.gameObject.SetActive (false);
+		dialogueCanvas.gameObject.SetActive (false);
 	}
 
 	void Update ()
 	{
 		if (Input.GetKeyDown (KeyCode.K))
 			active = true;
+		if (Input.GetKeyDown (KeyCode.K) && active)
+			goToNextWindow = true;
 		
 		if (active)
-			DisplayDialouge (dialougeText [0]); // display the canvas
+		{
+			dialogueCanvas.gameObject.SetActive (true);
+			DisplayDialouge (dialogueText [0]);
+
+		}
 	}
 
 	void ConformText ()
@@ -49,7 +57,6 @@ public class Test_DialougeScript : MonoBehaviour
 	/// <param name="startString">Start string.</param>
 	void DisplayDialouge (string startString)
 	{
-		Debug.Log ("Update This shit");
 		if (initialise)
 		{
 			canvasText.text = startString;
@@ -65,7 +72,7 @@ public class Test_DialougeScript : MonoBehaviour
 				active = false;
 				initialise = true;
 				endDialouge = false;
-				dialougeCanvas.gameObject.SetActive (false);
+				dialogueCanvas.gameObject.SetActive (false);
 			}
 			goToNextWindow = false;
 		}
@@ -77,15 +84,15 @@ public class Test_DialougeScript : MonoBehaviour
 	/// <returns>The next window.</returns>
 	string DisplayNextWindow ()
 	{
-		if (i >= dialougeText.Count)
+		if (i >= dialogueText.Count)
 		{
-			i = 0;
+			i = 1;
 			endDialouge = true;
 
 		}
 
-		if (i < dialougeText.Count) //prevent an argument out of 
-			currentDialWindow = dialougeText [i];	
+		if (i < dialogueText.Count) //prevent an argument out of range
+			currentDialWindow = dialogueText [i];	
 		
 		i++;
 
@@ -95,7 +102,7 @@ public class Test_DialougeScript : MonoBehaviour
 	/// <summary>
 	/// adds dialouge to the string list for debuging
 	/// </summary>
-	void DebugAddText ()
+	/*void DebugAddText ()
 	{
 		string dialWindow1 = "Hei im dankfart, i run this fucking mill. You might think this is some easy peasy job but fuck you";
 		string dialWindow2 = "dialWindow2";
@@ -108,5 +115,5 @@ public class Test_DialougeScript : MonoBehaviour
 		dialougeText.Add (dialWindow3);
 		dialougeText.Add (dialWindow4);
 		dialougeText.Add (dialWindow5);
-	}
+	}*/
 }

@@ -17,9 +17,9 @@ public class NPC_Generic : Actor
 
 	void OnMouseDown ()
 	{
-		if (hasDialouge)
+		if (atributes.hasDialouge)
 		{
-			dialouge.dialougeCanvas.gameObject.SetActive (true);
+			dialouge.dialogueCanvas.gameObject.SetActive (true);
 			
 			if (dialouge.active)
 				dialouge.goToNextWindow = true;
