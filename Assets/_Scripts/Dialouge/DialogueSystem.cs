@@ -45,8 +45,6 @@ public class DialogueSystem : MonoBehaviour
 		}
 	}
 
-
-
 	/// <summary>
 	/// Displays the dialouge on the canvas.
 	/// </summary>
@@ -55,7 +53,6 @@ public class DialogueSystem : MonoBehaviour
 	{
 		if (initialise)
 		{
-			
 			canvasText.text = startString;
 			currentDialWindow = startString;
 			initialise = false;
@@ -66,10 +63,7 @@ public class DialogueSystem : MonoBehaviour
 			canvasText.text = DisplayNextWindow ();
 			if (endDialouge)
 			{
-				active = false;
-				initialise = true;
-				endDialouge = false;
-				dialogueCanvas.gameObject.SetActive (false);
+				EndDialogue ();
 			}
 			goToNextWindow = false;
 		}
@@ -83,38 +77,25 @@ public class DialogueSystem : MonoBehaviour
 	{
 		if (i >= dialogueText.Count)
 		{
-			i = 0;
 			endDialouge = true;
-
 		}
 
 		if (!endDialouge)
 		{
 			if (i < dialogueText.Count) //prevent an argument out of range
 				currentDialWindow = dialogueText [i];	
-
 			i++;
-
 			return currentDialWindow;
 		}
 		return currentDialWindow;
 	}
 
-	/// <summary>
-	/// adds dialouge to the string list for debuging
-	/// </summary>
-	/*void DebugAddText ()
+	public void EndDialogue ()
 	{
-		string dialWindow1 = "Hei im dankfart, i run this fucking mill. You might think this is some easy peasy job but fuck you";
-		string dialWindow2 = "dialWindow2";
-		string dialWindow3 = "dialWindow3";
-		string dialWindow4 = "dialWindow4";
-		string dialWindow5 = "dialWindow5";
-
-		dialougeText.Add (dialWindow1);
-		dialougeText.Add (dialWindow2);
-		dialougeText.Add (dialWindow3);
-		dialougeText.Add (dialWindow4);
-		dialougeText.Add (dialWindow5);
-	}*/
+		active = false;
+		initialise = true;
+		endDialouge = false;
+		i = 0;
+		dialogueCanvas.gameObject.SetActive (false);
+	}
 }

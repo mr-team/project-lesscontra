@@ -66,8 +66,12 @@ public class DialougeEditor : EditorWindow
 					}
 					if (FirstTimeOfSession)
 					{
-						LoadDialouge ();
+						if (File.Exists ("D:/Users/matias/Documents/UnityProjects/Spo1/project-lesscontra/Editor/Dialogue/" + selectedObject.name + ".txt"))
+						{
+							LoadDialouge ();
+						}
 						FirstTimeOfSession = false;
+
 					}
 					EditorGUILayout.EndHorizontal ();
 					EditorGUILayout.Space ();

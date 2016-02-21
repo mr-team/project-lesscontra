@@ -9,7 +9,8 @@ public class GameController : MonoBehaviour
 	public GameObject UIObject;
 	public GameObject player;
 
-	PlayerController playerControll;
+	[HideInInspector]
+	public PlayerController playerControll;
 	UIFeedBack UIfeedBack;
 
 	public Action<Vector3> CallUI_WalkPoint;

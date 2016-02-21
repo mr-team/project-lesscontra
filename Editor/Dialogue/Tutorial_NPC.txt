@@ -1,0 +1,20 @@
+Dialogue file for Actor Tutorial_NPC
+
+//Windwo 1
+/w Hello, im the tutorial NPC. Im here to tell you the basics of this prototype! Click on me again to advacne the dialogue
+
+//Windwo 2
+/w To move arond simply click on the ground. 
+
+//Windwo 3
+/w To change view hit the space key on the keyboard
+
+//Windwo 4
+/w In first person mode you can click on the left mouse button to fire an arrow
+
+//Windwo 5
+/w To control the arrow in flight, use your mouse
+
+//Windwo 6
+/w Stay out of the guards field of view, and try to kill them all without being detected. If a guard sees a dead guard its game over
+

@@ -29,7 +29,7 @@ public class ActorStats
 
 public class Actor : MonoBehaviour
 {
-	
+	protected GameController controller;
 	public ActorAtributes atributes;
 	public ActorStats stats;
 
@@ -59,7 +59,7 @@ public class Actor : MonoBehaviour
 		if (atributes.isMerchant)
 			atributes.isSkillMaster = false;
 		
-
+		controller = GameObject.Find ("GameController").GetComponent<GameController> ();
 		actorControll = GetComponent<NpcController> ();
 		CheckSetup ();
 	}
