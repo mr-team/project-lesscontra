@@ -20,7 +20,7 @@ public class ActorEditor : EditorWindow
 		actorEditor.Show ();
 	}
 
-	void OnGUI ()
+	/*void OnGUI ()
 	{
 		if (Selection.activeGameObject == null || Selection.activeGameObject.GetComponent<NPC_Generic> () == null)//no actor selected, selection mode
 		{
@@ -39,5 +39,5 @@ public class ActorEditor : EditorWindow
 			EditorGUILayout.Space ();
 			GUILayout.EndArea ();
 		}
-	}
+	}*/
 }
