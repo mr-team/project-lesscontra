@@ -4,10 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-<<<<<<< HEAD
-    path: Assets/_Scenes/Prototype_allToghethers.unity
-=======
-    path: Assets/Bane.unity
->>>>>>> refs/remotes/mr-team/master
+  m_Scenes: []
