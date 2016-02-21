@@ -19,12 +19,18 @@ public class NPC_Generic : Actor
 	{
 		if (atributes.hasDialouge)
 		{
-			dialouge.dialogueCanvas.gameObject.SetActive (true);
+			if (dialouge.dialogueText.Count != 0)
+			{
+				dialouge.goToNextWindow = false;
+				dialouge.initialise = true;
+				dialouge.active = true;
+			}
+		
 			
 			if (dialouge.active)
 				dialouge.goToNextWindow = true;
 			
-			dialouge.active = true;
+
 
 		}
 	}

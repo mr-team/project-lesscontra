@@ -16,6 +16,7 @@ public class PlayerControllerReferances
 
 public class PlayerController : MonoBehaviour
 {
+	public GameObject arrowPrefab;
 	public PlayerControllerReferances referances;
 	public bool shouldCameraFollowPlayer = true;
 
@@ -141,7 +142,8 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-				arrowControll.FireArrow ();
+				GameObject tempArrow = Instantiate (arrowPrefab, arrowControll.transform.position, FPCamControll.FPModeAnchor.rotation)as GameObject;
+				tempArrow.GetComponent<ArrowController> ().FireArrow ();
 
 				fireForce = 0F;
 			}

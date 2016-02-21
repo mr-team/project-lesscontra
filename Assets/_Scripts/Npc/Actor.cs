@@ -8,6 +8,7 @@ using System;
 [Serializable]
 public class ActorAtributes
 {
+
 	public string actorName;
 	public bool isHostile = false;
 	public bool isQuestGiver = false;

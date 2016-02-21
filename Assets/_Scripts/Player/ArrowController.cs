@@ -56,7 +56,7 @@ public class ArrowController : MonoBehaviour
 
 		if (arrowFired && !physicsMode && !hitSomthing)
 		{
-			//transform.localPosition = transform.forward * Time.deltaTime * speed / 2;
+			transform.position = transform.position + transform.forward * Time.deltaTime * speed / 2;
 		}
 
 	}
@@ -82,8 +82,38 @@ public class ArrowController : MonoBehaviour
 		}
 	}
 
+	void ControlArrow_test ()
+	{
+		
+		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
+		rotationY += transform.localEulerAngles.z + Input.GetAxis ("Mouse Y") * sensitivityY;
+
+		if (rotationX > 180)
+		{
+			rotationX -= 360;
+		}
+
+		if (rotationX <= minimumX)
+			rotationX = minimumX;
+
+		if (rotationX >= maximumX)
+			rotationX = maximumX;
+
+
+		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+		Debug.Log ("rotX :" + rotationX);
+		Debug.Log ("rotY :" + rotationY);
+		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
+
+		//Gå fra nåværende rotation mot en ny "-inspirert" av rotX og rotY
+
+
+	}
+
 	void ControlArrow ()
 	{
+		float offset = 45;
+		
 		rotationX = transform.localEulerAngles.y + Input.GetAxis ("Mouse X") * sensitivityX;
 
 		if (rotationX > 180)
@@ -97,12 +127,26 @@ public class ArrowController : MonoBehaviour
 		if (rotationX >= maximumX)
 			rotationX = maximumX;
 
-		rotationY += transform.localEulerAngles.z + Input.GetAxis ("Mouse Y") * sensitivityY;
-		rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+		rotationY = transform.localEulerAngles.x - Input.GetAxis ("Mouse Y") * sensitivityY;
 
-		Vector3 calcRotation = new Vector3 (-rotationY, rotationX, 0);
+		/*if (rotationY > 180)
+		{
+			rotationY -= 360;
+		}
+		if (rotationY <= minimumY)
+			rotationY = minimumY;
 
-		transform.localEulerAngles = calcRotation;
+		if (rotationY >= maximumY)
+			rotationY = maximumY;*/
+		
+		//rotationY += rotationX + Input.GetAxis ("Mouse Y") * sensitivityY;
+		//rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+		Debug.Log (Input.GetAxis ("Mouse Y"));
+
+		Vector3 calcRotation = new Vector3 (rotationY, rotationX, 0);
+
+		transform.localEulerAngles = (calcRotation); 
 	}
 }
 	

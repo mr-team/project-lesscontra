@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
+	Actor actor;
 	[HideInInspector]
 	public Canvas dialogueCanvas;
 	Text canvasText;
-
-	[HideInInspector]
+	[SerializeField]
 	public List<string> dialogueText = new List<string> ();
+	[SerializeField]
+	public string[] dialogueTextArray = new string[0];
 	string currentDialWindow;
 
 	[HideInInspector]
@@ -18,38 +20,32 @@ public class DialogueSystem : MonoBehaviour
 	[HideInInspector]
 	public bool goToNextWindow;
 	bool isTalking;
-	bool initialise = true;
+	[HideInInspector]
+	public bool initialise = true;
 	bool endDialouge;
-
-	int i = 1;
+	bool saved;
+	int i = 0;
 
 	void Awake ()
 	{	
+		saved = false;
+		actor = gameObject.GetComponent<Actor> ();
 		dialogueCanvas = GameObject.Find ("DialougeCanvas").GetComponent<Canvas> ();
 		canvasText = dialogueCanvas.GetComponentInChildren<Text> ();
-
 		dialogueCanvas.gameObject.SetActive (false);
 	}
 
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.K))
-			active = true;
-		if (Input.GetKeyDown (KeyCode.K) && active)
-			goToNextWindow = true;
 		
 		if (active)
 		{
 			dialogueCanvas.gameObject.SetActive (true);
 			DisplayDialouge (dialogueText [0]);
-
 		}
 	}
 
-	void ConformText ()
-	{
-		
-	}
+
 
 	/// <summary>
 	/// Displays the dialouge on the canvas.
@@ -59,6 +55,7 @@ public class DialogueSystem : MonoBehaviour
 	{
 		if (initialise)
 		{
+			
 			canvasText.text = startString;
 			currentDialWindow = startString;
 			initialise = false;
@@ -86,16 +83,20 @@ public class DialogueSystem : MonoBehaviour
 	{
 		if (i >= dialogueText.Count)
 		{
-			i = 1;
+			i = 0;
 			endDialouge = true;
 
 		}
 
-		if (i < dialogueText.Count) //prevent an argument out of range
-			currentDialWindow = dialogueText [i];	
-		
-		i++;
+		if (!endDialouge)
+		{
+			if (i < dialogueText.Count) //prevent an argument out of range
+				currentDialWindow = dialogueText [i];	
 
+			i++;
+
+			return currentDialWindow;
+		}
 		return currentDialWindow;
 	}
 

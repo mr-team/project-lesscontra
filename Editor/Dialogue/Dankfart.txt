@@ -1,0 +1,8 @@
+Dialogue file for Actor Dankfart
+
+//Windwo 1
+/w HELLO MO name is ksad
+
+//Windwo 2
+/w 
+
