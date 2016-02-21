@@ -1,26 +1,37 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent (typeof(Player))]
 [RequireComponent (typeof(NavMeshAgent))]
-public class PlayerController : MonoBehaviour
+
+[Serializable]
+public class PlayerControllerReferances
 {
-	public bool shouldCameraFollowPlayer = true;
 	public GameObject TPMode;
 	public GameObject FPMode;
-
 	public GameObject Arrow;
+	public GameController gameControll;
+}
 
+public class PlayerController : MonoBehaviour
+{
+	public GameObject arrowPrefab;
+	public PlayerControllerReferances referances;
+	public bool shouldCameraFollowPlayer = true;
+
+	//Referances
 	ArrowController arrowControll;
 	CameraController FPCamControll;
-
+	UIFeedBack UIfeedBack;
 	Player player;
 	Animator playerAnim;
-
-	//ClickToMove
 	NavMeshAgent navAgent;
 
+	//clickToMove
+	[HideInInspector]
 	public Vector3 targetPosition;
+	Vector3 lastTargetPos;
 
 	bool isCrouching;
 	bool isProne;
@@ -33,6 +44,7 @@ public class PlayerController : MonoBehaviour
 	float timer;
 
 	//FPMode
+	[HideInInspector]
 	public bool FPModeActive;
 	bool transitionToFPMode;
 	bool hasFiredArrow;
@@ -40,7 +52,6 @@ public class PlayerController : MonoBehaviour
 	float minForce;
 	float maxForce;
 	float fireForce;
-
 
 	//ArrowMode
 	bool arrowModeActive;
@@ -51,12 +62,10 @@ public class PlayerController : MonoBehaviour
 		navAgent = GetComponent<NavMeshAgent> ();
 		playerAnim = GetComponent<Animator> ();
 		FPCamControll = GetComponent<CameraController> ();
-		arrowControll = Arrow.GetComponent<ArrowController> ();
-
-		moveSpeed = player.walkSpeed;
+		arrowControll = referances.Arrow.GetComponent<ArrowController> ();
+		moveSpeed = player.stats.walkSpeed;
 		GoToTPMode ();
 		FPModeActive = false;
-
 	}
 
 	void Start ()
@@ -67,16 +76,16 @@ public class PlayerController : MonoBehaviour
 	void Update ()
 	{
 		if (shouldCameraFollowPlayer && !FPModeActive)
-			Camera.main.transform.position = new Vector3 (this.transform.position.x - 15f, 30f, this.transform.position.z - 15f);
+			Camera.main.transform.position = new Vector3 (this.transform.position.x, 30f, this.transform.position.z);
 		
 		ChangeState (); 	//Update the movement state of the player
 
 		if (Input.GetMouseButton (0) && !FPModeActive)
 		{
-			if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground
+			if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground...
 			{
-				SetTargetPosition (CheckClickedLayer ()); 	//set the target position to the clicket point
-				ClickToMove ();		//move the player to the clicked point
+				SetTargetPosition (CheckClickedLayer ()); 	//...set the target position to the clicket point, and...
+				ClickToMove ();		//..move the player to the clicked point
 
 			} else if (CheckClickedLayer () == 10) 		//if the clicked layer was a scalable wall
 			{
@@ -84,25 +93,44 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown (KeyCode.J) && FPModeActive)
-
+		if (Input.GetMouseButtonDown (0) && !FPModeActive)
 		{
-			GoToTPMode ();
+			if (CheckClickedLayer () == 8)
+			{
+				lastTargetPos = targetPosition;
+				referances.gameControll.CallUI_WalkPoint (targetPosition);
 
+			}
+		}
+
+		if (Input.GetMouseButtonUp (0) && !FPModeActive && targetPosition != lastTargetPos)
+		{
+			if (CheckClickedLayer () == 8)
+			{	
+				
+				referances.gameControll.CallUI_WalkPoint (targetPosition);
+			}
 		}
 			
-		if (Input.GetKeyDown (KeyCode.K) && !FPModeActive)
+		if (Input.GetKeyDown (KeyCode.Space))
 		{
-			GoToFPMode ();
-
+			if (FPModeActive)
+			{
+				GoToTPMode ();
+				return;
+			}
+				
+			if (!FPModeActive)
+			{
+				GoToFPMode ();
+			}
 		}
-
+			
 		if (FPModeActive)
 		{
 			if (Input.GetMouseButton (0))
 			{
 				float modifyer = 300f;
-
 
 				fireForce += Time.deltaTime * modifyer;
 
@@ -114,8 +142,8 @@ public class PlayerController : MonoBehaviour
 				if (fireForce > maxForce)
 					fireForce = maxForce;
 				
-
-				arrowControll.FireArrow ();
+				GameObject tempArrow = Instantiate (arrowPrefab, arrowControll.transform.position, FPCamControll.FPModeAnchor.rotation)as GameObject;
+				tempArrow.GetComponent<ArrowController> ().FireArrow ();
 
 				fireForce = 0F;
 			}
@@ -128,19 +156,19 @@ public class PlayerController : MonoBehaviour
 	{
 		if (isRunning)
 		{
-			moveSpeed = player.runSpeed;
+			moveSpeed = player.stats.runSpeed;
 		}
 		if (isWalking)
 		{
-			moveSpeed = player.walkSpeed;
+			moveSpeed = player.stats.walkSpeed;
 		}
 		if (isCrouching)
 		{
-			moveSpeed = player.crouchSpeed;
+			moveSpeed = player.stats.crouchSpeed;
 		}
 		if (isProne)
 		{
-			moveSpeed = player.proneSpeed;
+			moveSpeed = player.stats.proneSpeed;
 		}
 
 		navAgent.speed = moveSpeed;
@@ -154,16 +182,6 @@ public class PlayerController : MonoBehaviour
 	{
 		if (layer == 8)
 		{
-			/*Vector3 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
-			Plane plane = new Plane (Vector3.up, mousePos); //creates a flat plane with a normal up, at the point of the player STUPID!
-
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition); //creates a ray from camerea throug mouse pointer
-			float point = 0f;
-
-			if (plane.Raycast (ray, out point)) //is the ray intercepts the plane return its point 
-				targetPosition = ray.GetPoint (point);	//store the point in a vector 3*/
-
 			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			if (Physics.Raycast (ray, out hit)) //if the raycast hit somthing
@@ -179,16 +197,6 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	void SetTargetPosition (int layer, Transform clickedTransform)
 	{
-		if (layer == 8)
-		{
-			RaycastHit hit;
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray, out hit))
-			{
-				if (hit.transform.gameObject.layer == 8)
-					targetPosition = hit.point;
-			}
-		}
 		if (layer == 10)
 		{
 			MoveToWall (clickedTransform);
@@ -318,9 +326,9 @@ public class PlayerController : MonoBehaviour
 
 	public void GoToFPMode ()
 	{
-		FPMode.SetActive (true);
-		TPMode.SetActive (false);
-		Arrow.SetActive (false);
+		referances.FPMode.SetActive (true);
+		referances.TPMode.SetActive (false);
+		referances.Arrow.SetActive (false);
 
 		Cursor.visible = (false);
 		Cursor.lockState = CursorLockMode.Locked;
@@ -334,9 +342,9 @@ public class PlayerController : MonoBehaviour
 
 	public void GoToTPMode ()
 	{
-		TPMode.SetActive (true);
-		FPMode.SetActive (false);
-		Arrow.SetActive (false);
+		referances.TPMode.SetActive (true);
+		referances.FPMode.SetActive (false);
+		referances.Arrow.SetActive (false);
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
@@ -347,17 +355,15 @@ public class PlayerController : MonoBehaviour
 
 	public void GoToArrowMode ()
 	{
-		Arrow.SetActive (true);
-		TPMode.SetActive (false);
-		FPMode.SetActive (false);
+		referances.Arrow.SetActive (true);
+		referances.TPMode.SetActive (false);
+		referances.FPMode.SetActive (false);
 
 		Cursor.visible = (true);
 		Cursor.lockState = CursorLockMode.None;
 
 		FPModeActive = false;
 		arrowModeActive = true;
-
-	}
 
 	}
 }

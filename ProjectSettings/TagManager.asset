@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Arrow
+  - Npc_Generic
+  - Npc_Guard
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - Ground
   - EmptyLayer!
   - JumpableWall
-  - 
+  - Npc
   - 
   - 
   - 
