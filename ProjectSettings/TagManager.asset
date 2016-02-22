@@ -19,8 +19,8 @@ TagManager:
   - EmptyLayer!
   - JumpableWall
   - Npc
-  - 
-  - 
+  - Player
+  - WorldObjects
   - 
   - 
   - 
