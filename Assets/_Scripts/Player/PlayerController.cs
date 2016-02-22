@@ -150,7 +150,12 @@ public class PlayerController : MonoBehaviour
 		}
 
 		HandleAnimation (); //handle animation transitions
-	}
+
+        Transform hit = GetClickedTransform();
+        if(hit != null && hit.CompareTag("Npc_Guard")) {
+            GetComponent<MeleeAttack>().addTarget(hit.GetComponent<NPC_Generic>());
+        }
+    }
 
 	public void ClickToMove ()
 	{
@@ -173,7 +178,7 @@ public class PlayerController : MonoBehaviour
 
 		navAgent.speed = moveSpeed;
 		navAgent.SetDestination (targetPosition);
-	}
+    }
 
 	/// <summary>
 	/// get the position of the mouse click.
@@ -292,7 +297,6 @@ public class PlayerController : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hit;
-
 		if (Physics.Raycast (ray, out hit) && hit.transform != null)
 			return hit.transform;
 

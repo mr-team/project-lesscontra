@@ -61,9 +61,16 @@ public class FieldOfView : MonoBehaviour
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask))
 				{
 					visibleTargets.Add (target);
-					target.GetComponent<PlayerController> ().targetPosition = new Vector3 (6.07f, 1.23f, -8.57f);
-					target.GetComponent<PlayerController> ().ClickToMove ();
-					target.transform.position = new Vector3 (6.07f, 1.23f, -8.57f);
+                    if(target.CompareTag("Player")) {
+                        target.GetComponent<PlayerController>().targetPosition = new Vector3(6.02f, 3.49f, 6.57f);
+                        target.GetComponent<PlayerController>().ClickToMove();
+                        target.transform.position = new Vector3(6.02f, 3.49f, 6.57f);
+                    } else if(target.CompareTag("Npc_Guard")) {
+                        if(target.GetComponent<HealthController>().isDead) {
+                            Debug.LogError("GAME OVER");
+                        }
+                    }
+					
 				}
 			}
 		}
