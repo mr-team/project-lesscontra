@@ -1,24 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
+[Serializable]
+public class PlayerStats
+{
+	public float runSpeed;
+	public float walkSpeed;
+	public float crouchSpeed;
+	public float proneSpeed;
+}
 
 public class Player : MonoBehaviour
 {
+	public PlayerStats stats;
 	static Player player;
-
-	public float runSpeed = 10;
-	public float walkSpeed = 10;
-	public float crouchSpeed = 10;
-	public float proneSpeed = 10;
 
 	void Start ()
 	{
 		if (player == null)
 			player = GetComponent<Player> ();
-	}
-
-
-	void Update ()
-	{
-	
 	}
 }

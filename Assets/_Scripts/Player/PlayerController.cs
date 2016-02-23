@@ -1,117 +1,184 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 [RequireComponent (typeof(Player))]
 [RequireComponent (typeof(NavMeshAgent))]
+
+[Serializable]
+public class PlayerControllerReferances
+{
+	public GameObject TPMode;
+	public GameObject FPMode;
+	public GameObject Arrow;
+	public GameController gameControll;
+}
+
 public class PlayerController : MonoBehaviour
 {
+	public GameObject arrowPrefab;
+	public PlayerControllerReferances referances;
 	public bool shouldCameraFollowPlayer = true;
-	public bool MoveWithArrows;
 
+	//Referances
+	ArrowController arrowControll;
+	CameraController FPCamControll;
+	UIFeedBack UIfeedBack;
 	Player player;
 	Animator playerAnim;
-
-	//For the click to move function
 	NavMeshAgent navAgent;
 
-    [HideInInspector]
-    public Vector3 targetPosition;
+	//clickToMove
+	[HideInInspector]
+	public Vector3 targetPosition;
+	Vector3 lastTargetPos;
 
-	public bool isCrouching;
-	public bool isProne;
-	public bool isWalking;
-	public bool isRunning;
-	public bool isJumping;
+	bool isCrouching;
+	bool isProne;
+	bool isWalking;
+	bool isRunning;
+	bool isJumping;
 
 	float moveSpeed;
-
-	public float distFromWall;
-
+	float distFromWall;
 	float timer;
+
+	//FPMode
+	[HideInInspector]
+	public bool FPModeActive;
+	bool transitionToFPMode;
+	bool hasFiredArrow;
+
+	float minForce;
+	float maxForce;
+	float fireForce;
+
+	//ArrowMode
+	bool arrowModeActive;
 
 	void Awake ()
 	{
 		player = GetComponent<Player> ();
 		navAgent = GetComponent<NavMeshAgent> ();
 		playerAnim = GetComponent<Animator> ();
-		moveSpeed = player.walkSpeed;
+		FPCamControll = GetComponent<CameraController> ();
+		arrowControll = referances.Arrow.GetComponent<ArrowController> ();
+		moveSpeed = player.stats.walkSpeed;
+		GoToTPMode ();
+		FPModeActive = false;
 	}
 
 	void Start ()
 	{
 		targetPosition = transform.position;
-
 	}
 
 	void Update ()
 	{
-		if (shouldCameraFollowPlayer)
-			Camera.main.transform.position = new Vector3 (this.transform.position.x - 15f, 30f, this.transform.position.z - 15f);
+		if (shouldCameraFollowPlayer && !FPModeActive)
+			Camera.main.transform.position = new Vector3 (this.transform.position.x, 30f, this.transform.position.z);
 		
-		//movement
-		if (MoveWithArrows) 	//should the player be controlled by WASD... 
-			WASDMove ();
-		else if (!MoveWithArrows)	//... or by clicking on the ground
-		{
-			ChangeState (); 	//Update the movement state of the player
+		ChangeState (); 	//Update the movement state of the player
 
+		if (Input.GetMouseButton (0) && !FPModeActive)
+		{
+			if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground...
+			{
+				SetTargetPosition (CheckClickedLayer ()); 	//...set the target position to the clicket point, and...
+				ClickToMove ();		//..move the player to the clicked point
+
+			} else if (CheckClickedLayer () == 10) 		//if the clicked layer was a scalable wall
+			{
+				SetTargetPosition (CheckClickedLayer (), GetClickedTransform ()); //move the player to the "jump" spot by the wall
+			}
+		}
+
+		if (Input.GetMouseButtonDown (0) && !FPModeActive)
+		{
+			if (CheckClickedLayer () == 8)
+			{
+				lastTargetPos = targetPosition;
+				referances.gameControll.CallUI_WalkPoint (targetPosition);
+
+			}
+		}
+
+		if (Input.GetMouseButtonUp (0) && !FPModeActive && targetPosition != lastTargetPos)
+		{
+			if (CheckClickedLayer () == 8)
+			{	
+				
+				referances.gameControll.CallUI_WalkPoint (targetPosition);
+			}
+		}
+			
+		if (Input.GetKeyDown (KeyCode.Space))
+		{
+			if (FPModeActive)
+			{
+				GoToTPMode ();
+				return;
+			}
+				
+			if (!FPModeActive)
+			{
+				GoToFPMode ();
+			}
+		}
+			
+		if (FPModeActive)
+		{
 			if (Input.GetMouseButton (0))
 			{
-				if (CheckClickedLayer () == 8)  	//if the clicked layer was the ground
-				{
-					SetTargetPosition (CheckClickedLayer ()); 	//set the target position to the clicket point
-					ClickToMove ();		//move the player to the clicked point
+				float modifyer = 300f;
 
-				} else if (CheckClickedLayer () == 10) 		//if the clicked layer was a scalable wall
-				{
-					SetTargetPosition (CheckClickedLayer (), GetClickedTransform ()); //move the player to the "jump" spot by the wall
-				}
+				fireForce += Time.deltaTime * modifyer;
+
+			}
+			if (Input.GetMouseButtonUp (0))
+			{
+				if (fireForce < minForce)
+					fireForce = minForce;
+				if (fireForce > maxForce)
+					fireForce = maxForce;
+				
+				GameObject tempArrow = Instantiate (arrowPrefab, arrowControll.transform.position, FPCamControll.FPModeAnchor.rotation)as GameObject;
+				tempArrow.GetComponent<ArrowController> ().FireArrow ();
+
+				fireForce = 0F;
 			}
 		}
 
 		HandleAnimation (); //handle animation transitions
-	}
 
-	void WASDMove ()
-	{
-		float moveX = Input.GetAxis ("Horizontal");
-		float movez = Input.GetAxis ("Vertical");
-		float Speed = player.walkSpeed;
-		float crouchSpeed = player.walkSpeed * 0.6f;
-
-		Vector3 dir = new Vector3 (moveX, 0, movez);
-
-		if (Input.GetKey (KeyCode.LeftShift))
-		{
-			Speed = crouchSpeed;
-		}
-		transform.localPosition += dir * Speed * Time.deltaTime;
-	}
+        Transform hit = GetClickedTransform();
+        if(hit != null && hit.CompareTag("Npc_Guard")) {
+            GetComponent<MeleeAttack>().addTarget(hit.GetComponent<NPC_Generic>());
+        }
+    }
 
 	public void ClickToMove ()
 	{
 		if (isRunning)
 		{
-			moveSpeed = player.runSpeed;
+			moveSpeed = player.stats.runSpeed;
 		}
 		if (isWalking)
 		{
-			moveSpeed = player.walkSpeed;
+			moveSpeed = player.stats.walkSpeed;
 		}
 		if (isCrouching)
 		{
-			moveSpeed = player.crouchSpeed;
+			moveSpeed = player.stats.crouchSpeed;
 		}
 		if (isProne)
 		{
-			moveSpeed = player.proneSpeed;
+			moveSpeed = player.stats.proneSpeed;
 		}
-		 
-		Debug.Log (targetPosition);
 
 		navAgent.speed = moveSpeed;
 		navAgent.SetDestination (targetPosition);
-	}
+    }
 
 	/// <summary>
 	/// get the position of the mouse click.
@@ -120,12 +187,13 @@ public class PlayerController : MonoBehaviour
 	{
 		if (layer == 8)
 		{
-			Plane plane = new Plane (Vector3.up, transform.position);
+			RaycastHit hit;
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			float point = 0f;
-
-			if (plane.Raycast (ray, out point))
-				targetPosition = ray.GetPoint (point);	
+			if (Physics.Raycast (ray, out hit)) //if the raycast hit somthing
+			{
+				if (hit.transform.gameObject.layer == 8) //if it hit an object in the ground layer
+					targetPosition = hit.point; //get the point where ray hit the object
+			}
 		}
 	}
 
@@ -134,15 +202,6 @@ public class PlayerController : MonoBehaviour
 	/// </summary>
 	void SetTargetPosition (int layer, Transform clickedTransform)
 	{
-		if (layer == 8)
-		{
-			Plane plane = new Plane (Vector3.up, transform.position);
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			float point = 0f;
-
-			if (plane.Raycast (ray, out point))
-				targetPosition = ray.GetPoint (point);	
-		}
 		if (layer == 10)
 		{
 			MoveToWall (clickedTransform);
@@ -238,7 +297,6 @@ public class PlayerController : MonoBehaviour
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
 		RaycastHit hit;
-
 		if (Physics.Raycast (ray, out hit) && hit.transform != null)
 			return hit.transform;
 
@@ -255,7 +313,6 @@ public class PlayerController : MonoBehaviour
 		//Set destination to wall
 
 		navAgent.SetDestination (jumpPoint);
-
 	}
 
 	public void JumpWall ()
@@ -269,5 +326,48 @@ public class PlayerController : MonoBehaviour
 			return;
 
 		transform.position = point;
+	}
+
+	public void GoToFPMode ()
+	{
+		referances.FPMode.SetActive (true);
+		referances.TPMode.SetActive (false);
+		referances.Arrow.SetActive (false);
+
+		Cursor.visible = (false);
+		Cursor.lockState = CursorLockMode.Locked;
+		arrowControll.gameObject.SetActive (true);
+
+		FPModeActive = true;
+		arrowModeActive = false;
+
+
+	}
+
+	public void GoToTPMode ()
+	{
+		referances.TPMode.SetActive (true);
+		referances.FPMode.SetActive (false);
+		referances.Arrow.SetActive (false);
+
+		Cursor.visible = (true);
+		Cursor.lockState = CursorLockMode.None;
+
+		FPModeActive = false;
+		arrowModeActive = false;
+	}
+
+	public void GoToArrowMode ()
+	{
+		referances.Arrow.SetActive (true);
+		referances.TPMode.SetActive (false);
+		referances.FPMode.SetActive (false);
+
+		Cursor.visible = (true);
+		Cursor.lockState = CursorLockMode.None;
+
+		FPModeActive = false;
+		arrowModeActive = true;
+
 	}
 }
