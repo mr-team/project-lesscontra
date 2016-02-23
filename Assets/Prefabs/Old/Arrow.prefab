@@ -62,8 +62,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168100}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.549, y: -0.406, z: 2.068}
-  m_LocalScale: {x: 0.13278918, y: 0.14439128, z: 0.13065472}
+  m_LocalPosition: {x: .549000025, y: -.405999988, z: 2.06800008}
+  m_LocalScale: {x: .13278918, y: .144391283, z: .130654722}
   m_Children:
   - {fileID: 454874}
   - {fileID: 423190}
@@ -75,9 +75,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 110028}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0.11, y: 0.1, z: -2.35}
-  m_LocalScale: {x: 0.13208796, y: 4.821485, z: 0.17978537}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalPosition: {x: .109999999, y: .100000001, z: -2.3499999}
+  m_LocalScale: {x: .132087961, y: 4.82148504, z: .179785371}
   m_Children: []
   m_Father: {fileID: 420142}
   m_RootOrder: 1
@@ -87,9 +87,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 168330}
-  m_LocalRotation: {x: 0.053555977, y: 0, z: 0, w: 0.99856484}
-  m_LocalPosition: {x: 0, y: 1.87, z: -7.97}
-  m_LocalScale: {x: 0.12736441, y: 1, z: 7.8514853}
+  m_LocalRotation: {x: .0535559766, y: 0, z: 0, w: .998564839}
+  m_LocalPosition: {x: 0, y: 1.87, z: -7.96999979}
+  m_LocalScale: {x: .127364412, y: 1, z: 7.85148525}
   m_Children: []
   m_Father: {fileID: 420142}
   m_RootOrder: 0
@@ -102,14 +102,14 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: .00999999978
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -125,7 +125,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
+  m_StereoSeparation: .0219999999
   m_StereoMirrorMode: 0
 --- !u!23 &2336568
 MeshRenderer:
@@ -145,10 +145,8 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -176,7 +174,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -192,8 +190,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.3817626}
-  m_Center: {x: 0.00017864896, y: 0.0000016511979, z: 0.61104846}
+  m_Size: {x: 1, y: 1, z: 1.38176262}
+  m_Center: {x: .000178648959, y: 1.65119786e-06, z: .61104846}
 --- !u!92 &9239444
 Behaviour:
   m_ObjectHideFlags: 1
@@ -237,7 +235,6 @@ MonoBehaviour:
   maximumX: 180
   minimumY: -60
   maximumY: 5
-  physicsMode: 0
 --- !u!124 &12467132
 Behaviour:
   m_ObjectHideFlags: 1

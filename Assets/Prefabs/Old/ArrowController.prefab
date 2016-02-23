@@ -63,8 +63,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194388}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.026, y: 3.444, z: 2.015}
-  m_LocalScale: {x: 0.022367766, y: 0.022367768, z: 0.022367768}
+  m_LocalPosition: {x: 5.02600002, y: 3.44400001, z: 2.0150001}
+  m_LocalScale: {x: .0223677661, y: .022367768, z: .022367768}
   m_Children:
   - {fileID: 485974}
   - {fileID: 499542}
@@ -77,8 +77,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148992}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.016351195, y: 0.8500046, z: -6.62}
-  m_LocalScale: {x: 0.20521203, y: 0.6011556, z: 11.69461}
+  m_LocalPosition: {x: -.0163511951, y: .850004613, z: -6.61999989}
+  m_LocalScale: {x: .205212027, y: .601155579, z: 11.6946096}
   m_Children: []
   m_Father: {fileID: 408562}
   m_RootOrder: 0
@@ -88,9 +88,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 191030}
-  m_LocalRotation: {x: 0.00000011479798, y: 0.70462495, z: 0.70957994, w: -0.00000011560525}
-  m_LocalPosition: {x: -0.016344218, y: 0.10405215, z: -5.0961213}
-  m_LocalScale: {x: 0.20521203, y: 12.09055, z: 0.20521192}
+  m_LocalRotation: {x: 1.14797977e-07, y: .704624951, z: .709579945, w: -1.15605253e-07}
+  m_LocalPosition: {x: -.0163442176, y: .104052149, z: -5.09612131}
+  m_LocalScale: {x: .205212027, y: 12.0905504, z: .205211923}
   m_Children: []
   m_Father: {fileID: 408562}
   m_RootOrder: 1
@@ -103,14 +103,14 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0.019607844}
+  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.01
+  near clip plane: .00999999978
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -126,7 +126,7 @@ Camera:
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
+  m_StereoSeparation: .0219999999
   m_StereoMirrorMode: 0
 --- !u!23 &2306818
 MeshRenderer:
@@ -146,10 +146,8 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -172,10 +170,8 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
@@ -203,7 +199,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -220,7 +216,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 3.0496428}
-  m_Center: {x: 0, y: 0, z: 2.4541647}
+  m_Center: {x: 0, y: 0, z: 2.45416474}
 --- !u!92 &9269646
 Behaviour:
   m_ObjectHideFlags: 1
