@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightmapSnapshot: {fileID: 112000002, guid: 6982ebfe384a80541939315b8e189eb4,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -107,7 +108,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &110629282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -862,7 +863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &963584942
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1566,6 +1567,10 @@ Prefab:
       propertyPath: m_TagString
       value: Npc_Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 162714, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
   m_IsPrefabParent: 0
@@ -1590,7 +1595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1744675732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2294,6 +2299,10 @@ Prefab:
       propertyPath: m_TagString
       value: Npc_Guard
       objectReference: {fileID: 0}
+    - target: {fileID: 162714, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
   m_IsPrefabParent: 0
@@ -2317,7 +2326,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1973980834
 Transform:
   m_ObjectHideFlags: 0
@@ -2535,7 +2544,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2078259825
 Transform:
   m_ObjectHideFlags: 0
@@ -3123,6 +3132,10 @@ Prefab:
     - target: {fileID: 117506, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
       propertyPath: m_TagString
       value: Npc_Guard
+      objectReference: {fileID: 0}
+    - target: {fileID: 162714, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 93c83347f5c92374fa19bf10ee5c3bfc, type: 2}
