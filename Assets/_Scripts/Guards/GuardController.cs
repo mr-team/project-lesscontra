@@ -1,28 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class GuardController: MonoBehaviour
-{
-	/*[HideInInspector]
+public class GuardController : MonoBehaviour {
+    public GuardCommunicator GC;
 
-	private float closeEnoughLimit = 0.2f;
-	private Vector3 _direction;
-	private Quaternion _lookRotation;
-
-	void Awake ()
-	{
-		isHostile = true;
+    void FixedUpdate() {
+        if(GC.hasLastKnownLocation()) {
+            
+        }
 	}
-
-	void FixedUpdate ()
-	{
-		if (actorActions.Count == 0)
-			return;
-		
-		//NPCAction dis = actorActions [onCurrentAction];
-
-		//DoAction (dis);
-
-	}*/
 }
