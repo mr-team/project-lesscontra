@@ -6,6 +6,7 @@ public class GuardCommunicator : MonoBehaviour {
     
     public Vector3 lastKnowLocation = new Vector3(0f, -1337f, 0f);
     public float forgetLocationTimer = 0f;
+    public float alarmRadius = 15f;
     
 	void FixedUpdate() {
         if(hasLastKnownLocation()) {

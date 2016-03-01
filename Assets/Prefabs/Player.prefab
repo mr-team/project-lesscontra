@@ -17,8 +17,8 @@ GameObject:
   m_Name: ArrowController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &118174
 GameObject:
@@ -50,8 +50,8 @@ GameObject:
   m_Name: FPCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &125172
 GameObject:
@@ -67,8 +67,8 @@ GameObject:
   m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &135682
 GameObject:
@@ -85,7 +85,7 @@ GameObject:
   m_Name: Archerv2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &135726
@@ -103,8 +103,8 @@ GameObject:
   m_Name: arm_with_bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &181626
 GameObject:
@@ -121,8 +121,8 @@ GameObject:
   m_Name: arrow
   m_TagString: Weapon
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &181788
 GameObject:
@@ -139,8 +139,8 @@ GameObject:
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &183856
 GameObject:
@@ -165,9 +165,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 427344}
+  - 114: {fileID: 11481462}
+  - 114: {fileID: 11436682}
   - 54: {fileID: 5491408}
   - 195: {fileID: 19537316}
   - 65: {fileID: 6574376}
+  - 114: {fileID: 11490684}
   m_Layer: 12
   m_Name: Player
   m_TagString: Player
@@ -745,6 +748,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11436682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 698c71e831a25fe44ae424c0fb09824d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11451862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -756,6 +770,36 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11481462
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28f45a760e3f524429b68a2b2ac7bd7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  maxHealth: 100
+  walkSpeed: 5
+  minAttackDamage: 0
+  maxAttackDamage: 25
+--- !u!114 &11490684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 188194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac6ea8e2365874f4d880977fa08e6449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {x: 0, y: 0, z: 0}
+  feedBackElements:
+  - {fileID: 112838, guid: caf4ccc6daad3c044bc674c8d02a4a47, type: 2}
 --- !u!124 &12446444
 Behaviour:
   m_ObjectHideFlags: 1
@@ -788,7 +832,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 2.1500001
   m_BaseOffset: 2.21000004
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 48
   m_ObstacleAvoidanceType: 4
 --- !u!1001 &100100000
 Prefab:
