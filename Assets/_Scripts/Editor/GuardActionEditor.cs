@@ -5,8 +5,6 @@ using UnityEditor;
 [CustomEditor(typeof(GuardController))]
 public class GuardActionEditor : Editor {
 
-    private Vector3 minVector = new Vector3(float.MinValue, float.MinValue, float.MinValue);
-
     void OnSceneGUI() {
         GuardController master = (GuardController) target;
         Vector3 lastPos = master.guardActions[master.guardActions.Count - 1].type != NPCAction.ActionType.Animation ?

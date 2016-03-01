@@ -6,12 +6,15 @@ public class PlayerWalk : MonoBehaviour {
     public Vector3 targetPos;
     public GameObject[] feedBackElements;
 
+    private PlayerController PC;
+
     void Start() {
         agent = GetComponent<NavMeshAgent>();
+        PC = GetComponent<PlayerController>();
     }
     
 	void Update() {
-        if(Input.GetMouseButtonUp(0)) {
+        if(Input.GetMouseButtonUp(0) && PC.currentCameraMode == PlayerController.CameraMode.Third) {
             if(CheckClickedLayer() == 8) {
                 SetTargetPosition(CheckClickedLayer());
                 agent.SetDestination(targetPos);

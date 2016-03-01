@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
 
     public void StartGame() {
         Debug.Log("Starting game");
-        Application.LoadLevel(1);
+        SceneManager.LoadScene("Prototype_allTogethers");
     }
 
     public void LoadGame() {
