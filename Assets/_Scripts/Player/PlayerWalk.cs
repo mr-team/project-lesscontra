@@ -14,7 +14,7 @@ public class PlayerWalk : MonoBehaviour {
     }
     
 	void Update() {
-        if(Input.GetMouseButtonUp(0) && PC.currentCameraMode == PlayerController.CameraMode.Third) {
+        if(Input.GetMouseButton(0) && PC.currentCameraMode == PlayerController.CameraMode.Third) {
             if(CheckClickedLayer() == 8) {
                 SetTargetPosition(CheckClickedLayer());
                 agent.SetDestination(targetPos);
