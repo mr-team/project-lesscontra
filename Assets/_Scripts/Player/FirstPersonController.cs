@@ -2,14 +2,17 @@
 using System.Collections;
 
 public class FirstPersonController : MonoBehaviour {
-    private GameObject vertical;
+    private GameObject player;
 
-    void Start() {
-        vertical = transform.FindChild("VerticalRotate").gameObject;
+    private float mouseRotateSense;
+
+
+    void Start () {
+        player = GameObject.Find("Player");
+        mouseRotateSense = GameObject.Find("Camera Focus").GetComponent<FollowPlayer>().mouseRotateSense;
     }
 	
 	void Update() {
-        transform.Rotate(new Vector3(0f, Input.GetAxis("Horizontal"), 0f));
-        vertical.transform.Rotate(new Vector3(Input.GetAxis("Vertical"), 0f, 0f));
+        player.transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X") * mouseRotateSense, 0f));
     }
 }

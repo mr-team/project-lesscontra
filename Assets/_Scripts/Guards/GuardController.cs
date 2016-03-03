@@ -20,9 +20,6 @@ public class GuardController : MonoBehaviour {
     }
 
     void FixedUpdate() {
-        if(gs.health <= 0f) {
-            Destroy(gameObject);
-        }
         if(currentState == GuardState.Attacking) {
             if(Vector3.Distance(transform.position, player.transform.position) <= 1f) {
                 Vector3 _direction = (player.transform.position - transform.position).normalized;
