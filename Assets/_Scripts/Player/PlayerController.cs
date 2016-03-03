@@ -10,9 +10,11 @@ public class PlayerController : MonoBehaviour {
     public GameObject ArrowMode;
 
     private PlayerStats ps;
+    private GameObject arrowSpawn;
 
     void Awake() {
-        ps = GetComponent<PlayerStats>();    
+        ps = GetComponent<PlayerStats>();
+        arrowSpawn = FirstPerson.transform.FindChild("VerticalAnchor").FindChild("arm_with_bow").FindChild("ArrowSpawn").gameObject;
     }
 
     void Update() {
@@ -46,8 +48,14 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetMouseButtonDown(0)) {
                 currentCameraMode = CameraMode.Arrow;
                 FirstPerson.SetActive(false);
-                Vector3 ArrowPos = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
-                GameObject arrow = Instantiate(ArrowMode, ArrowPos, transform.rotation) as GameObject;
+                Transform vert = FirstPerson.transform.FindChild("VerticalAnchor");
+
+                /*Vector3 ArrowPos = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
+
+                GameObject arrow = Instantiate(ArrowMode, ArrowPos, new Quaternion(vert.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w)) as GameObject;
+                */
+
+                GameObject arrow = Instantiate(ArrowMode, arrowSpawn.transform.position, arrowSpawn.transform.rotation) as GameObject;
             }
         } else {
             if (FirstPerson.activeInHierarchy)
