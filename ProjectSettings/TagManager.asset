@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Npc_Generic
   - Npc_Guard
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -19,8 +20,8 @@ TagManager:
   - EmptyLayer!
   - JumpableWall
   - Npc
-  - 
-  - 
+  - Player
+  - WorldObjects
   - 
   - 
   - 
