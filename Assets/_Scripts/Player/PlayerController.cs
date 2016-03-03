@@ -49,12 +49,6 @@ public class PlayerController : MonoBehaviour {
                 currentCameraMode = CameraMode.Arrow;
                 FirstPerson.SetActive(false);
                 Transform vert = FirstPerson.transform.FindChild("VerticalAnchor");
-
-                /*Vector3 ArrowPos = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
-
-                GameObject arrow = Instantiate(ArrowMode, ArrowPos, new Quaternion(vert.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w)) as GameObject;
-                */
-
                 GameObject arrow = Instantiate(ArrowMode, arrowSpawn.transform.position, arrowSpawn.transform.rotation) as GameObject;
             }
         } else {

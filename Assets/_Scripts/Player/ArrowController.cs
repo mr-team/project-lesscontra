@@ -25,6 +25,7 @@ public class ArrowController : MonoBehaviour {
     }
 
     void OnCollisionEnter(Collision other)  {
+        GetComponent<Rigidbody>().isKinematic = true;
         hitSomthing = true;
         transform.parent = other.gameObject.transform;
         transform.GetComponent<BoxCollider>().enabled = false;
