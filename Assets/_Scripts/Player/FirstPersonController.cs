@@ -3,16 +3,15 @@ using System.Collections;
 
 public class FirstPersonController : MonoBehaviour {
     private GameObject player;
-
-    private float mouseRotateSense;
-
+    private Transform VerticalAnchor;
 
     void Start () {
         player = GameObject.Find("Player");
-        mouseRotateSense = GameObject.Find("Camera Focus").GetComponent<FollowPlayer>().mouseRotateSense;
+        VerticalAnchor = transform.FindChild("VerticalAnchor");
     }
 	
 	void Update() {
-        player.transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X") * mouseRotateSense, 0f));
+        player.transform.Rotate(new Vector3(0f, Input.GetAxis("Horizontal"), 0f));
+        VerticalAnchor.Rotate(new Vector3(Input.GetAxis("Vertical"), 0f, 0f));
     }
 }

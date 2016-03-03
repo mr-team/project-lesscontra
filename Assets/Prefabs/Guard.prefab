@@ -340,7 +340,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  walkSpeed: 5
   minAttackDamage: 0
   maxAttackDamage: 25
 --- !u!114 &11463426
@@ -393,7 +392,23 @@ MonoBehaviour:
   GC: {fileID: 0}
   gs: {fileID: 0}
   currentState: 0
-  guardActions: []
+  guardActions:
+  - dest: {x: 6.28999996, y: 3.81999993, z: 6.63000011}
+    ani: 0
+    waitTime: 0
+    type: 0
+  - dest: {x: -4.55999994, y: 3.81999993, z: 10.6000004}
+    ani: 0
+    waitTime: 0
+    type: 0
+  - dest: {x: 5.65999985, y: 3.81999993, z: 13.1499996}
+    ani: 0
+    waitTime: 0
+    type: 0
+  - dest: {x: 8.44999981, y: 3.81999993, z: 9.86999989}
+    ani: 0
+    waitTime: 0
+    type: 0
 --- !u!195 &19518410
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -406,7 +421,7 @@ NavMeshAgent:
   m_Acceleration: 6
   avoidancePriority: 50
   m_AngularSpeed: 200
-  m_StoppingDistance: 0
+  m_StoppingDistance: .5
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
