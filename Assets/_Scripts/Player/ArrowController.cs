@@ -2,13 +2,17 @@
 using System.Collections;
 
 public class ArrowController : MonoBehaviour {
+    public float minimumX;
+    public float maximumX;
+    public float minimumY;
+    public float maximumY;
 
     private float mouseRotateSense;
     private float rotationX;
     private float rotationY;
+    private bool arrowFired = true;
     private bool hitSomthing = false;
     private float speed = 10f;
-    private PlayerController player;
 
     //private Rigidbody arrowRigid;
 
@@ -17,41 +21,72 @@ public class ArrowController : MonoBehaviour {
     void Start () {
         //arrowRigid = GetComponent<Rigidbody>();
         mouseRotateSense = GameObject.Find("Camera Focus").GetComponent<FollowPlayer>().mouseRotateSense;
-        blood = transform.FindChild("arrow").transform.FindChild("Particle_Blood").gameObject;
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        blood = transform.FindChild("Particle_Blood").gameObject;
     }
 
     void FixedUpdate() {
-        
-        ControlArrow();
+        /*if (arrowFired && physicsMode)
+		{
+			transform.Translate (Vector3.forward.x * speed * Time.deltaTime, 0, Vector3.forward.z * speed * Time.deltaTime);
+			ControlArrowXZ ();
+		}*/
 
-        if (!hitSomthing) {
-            transform.position = transform.position + transform.forward * Time.deltaTime * speed / 2;
+        if (arrowFired) {
+            ControlArrow();
+        }
+
+        if (arrowFired && !hitSomthing) {
+            transform.position = transform.position + transform.up * Time.deltaTime * speed / 2;
         }
 
     }
 
     void OnCollisionEnter(Collision other)  {
-        Debug.Log("KRIS IS A FUCKING FGT");
         //arrowRigid.isKinematic = true;
+        arrowFired = false;
         hitSomthing = true;
         transform.parent = other.gameObject.transform;
-        GameObject cam = transform.FindChild("arrow").transform.FindChild("Camera").gameObject;
-        transform.GetComponent<BoxCollider>().enabled = false;
-        Destroy(cam);
-        player.currentCameraMode = PlayerController.CameraMode.Third;
-
+        Transform cam = transform.FindChild("Camera");
+        cam.gameObject.SetActive(false);
+        
         if (other.transform.tag == "Npc_Guard") {
-            blood.GetComponent<ParticleSystem>().Play();
+            blood.GetComponent<ParticleSystem>().loop = true;
         }
     }
 
     void ControlArrow() {
-        if(hitSomthing)
-            return;
-        rotationX = transform.localEulerAngles.y + Input.GetAxis("Horizontal");
-        rotationY = transform.localEulerAngles.x - Input.GetAxis("Vertical");
+        //offset = 45;
+
+        rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * mouseRotateSense;
+
+        if (rotationX > 180) {
+            rotationX -= 360;
+        }
+
+        if (rotationX <= minimumX)
+            rotationX = minimumX;
+
+        if (rotationX >= maximumX)
+            rotationX = maximumX;
+
+        rotationY = transform.localEulerAngles.x - Input.GetAxis("Mouse Y") * mouseRotateSense;
+
+        /*if (rotationY > 180)
+		{
+			rotationY -= 360;
+		}
+		if (rotationY <= minimumY)
+			rotationY = minimumY;
+		if (rotationY >= maximumY)
+			rotationY = maximumY;*/
+
+        //rotationY += rotationX + Input.GetAxis ("Mouse Y") * sensitivityY;
+        //rotationY = Mathf.Clamp (rotationY, minimumY, maximumY);
+
+        //Debug.Log(Input.GetAxis("Mouse Y"));
+
         Vector3 calcRotation = new Vector3(rotationY, rotationX, 0);
+
         transform.localEulerAngles = (calcRotation);
     }
 }
