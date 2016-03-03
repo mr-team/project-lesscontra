@@ -12,13 +12,19 @@ public class PlayerWalk : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         PC = GetComponent<PlayerController>();
     }
-    
+
+    private float coolDownAnimation = 1f;
+    private float coolWalkAnimation = 1f;
 	void Update() {
+        coolWalkAnimation += Time.deltaTime;
+        if(Input.GetMouseButtonUp(0)) {
+            coolWalkAnimation = coolDownAnimation;
+        }
         if(Input.GetMouseButton(0) && PC.currentCameraMode == PlayerController.CameraMode.Third) {
             if(CheckClickedLayer() == 8) {
                 SetTargetPosition(CheckClickedLayer());
                 agent.SetDestination(targetPos);
-                WalkPointAnim(targetPos);
+                WalkPointAnim(targetPos, (coolWalkAnimation >= coolDownAnimation));
             }
         }
 	}
@@ -35,17 +41,19 @@ public class PlayerWalk : MonoBehaviour {
         }
     }
 
-    public void WalkPointAnim(Vector3 Point) {
+    public void WalkPointAnim(Vector3 Point, bool spawnRing) {
         Point = new Vector3(Point.x, Point.y + 0.03f, Point.z);
-        GameObject tempElement = Instantiate(feedBackElements[0], Point, Quaternion.identity) as GameObject;
-        tempElement.transform.eulerAngles = (new Vector3(90, 0, 0));
-        tempElement.name = "Mouse Click Location: " + Point;
-        Destroy(tempElement, 0.5f);
+        if(spawnRing) {
+            GameObject tempElement = Instantiate(feedBackElements[0], Point, Quaternion.identity) as GameObject;
+            tempElement.transform.eulerAngles = (new Vector3(90, 0, 0));
+            tempElement.name = "Mouse Click Location: " + Point;
+            Destroy(tempElement, 0.5f);
+            coolWalkAnimation = 0f;
+        }
     }
 
     private int CheckClickedLayer() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
 
         if(Physics.Raycast(ray, out hit) && hit.transform != null)
