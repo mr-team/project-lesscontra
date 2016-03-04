@@ -1,0 +1,11 @@
+Dialogue file for Actor Actor_QuestGiver
+
+//Window 1
+/w fddf
+
+//Window 2
+/w fd
+
+//Window 3
+/w s
+

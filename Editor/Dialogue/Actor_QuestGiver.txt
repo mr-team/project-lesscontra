@@ -1,0 +1,17 @@
+Dialogue file for Actor Actor_QuestGiver
+
+//Windwo 1
+/w hei !
+
+//Windwo 2
+/w din jæææævla HOOOR UNGE
+
+//Windwo 3
+/w cunt to beed
+
+//Windwo 4
+/w look herre
+
+//Windwo 5
+/w nei!
+
