@@ -5,18 +5,32 @@ public class PlayerWalk : MonoBehaviour {
     private NavMeshAgent agent;
     public Vector3 targetPos;
     public GameObject[] feedBackElements;
+    public GameObject TPArcher;
 
     private PlayerController PC;
+    private Animation archerAni;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         PC = GetComponent<PlayerController>();
+        archerAni = TPArcher.GetComponent<Animation>();
     }
 
     private float coolDownAnimation = 1f;
     private float coolWalkAnimation = 1f;
 	void Update() {
         coolWalkAnimation += Time.deltaTime;
+        if(PC.isDead())
+            return;
+        if(isWalking()) {
+            Debug.Log("Walking");
+            archerAni.clip = archerAni.GetClip("Walk");
+            if(!archerAni.isPlaying)
+                archerAni.Play();
+        } else {
+            archerAni.clip = archerAni.GetClip("Death");
+            archerAni.Stop();
+        }
         if(Input.GetMouseButtonUp(0)) {
             coolWalkAnimation = coolDownAnimation;
         }
@@ -39,6 +53,15 @@ public class PlayerWalk : MonoBehaviour {
                     targetPos = hit.point; //get the point where ray hit the object
             }
         }
+    }
+
+    private Vector3 lastPos;
+    public bool isWalking() {
+        float dist = Vector3.Distance(transform.position, lastPos);
+        if(dist == 0f)
+            return false;
+        lastPos = transform.position;
+        return true;
     }
 
     public void WalkPointAnim(Vector3 Point, bool spawnRing) {

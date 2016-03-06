@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: 4df6bdb6926012d468c505089ab1d28d
+timeCreated: 1457278747
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Archer
+    100002: //RootNode
+    100004: Head_Skin
+    100006: LeftElbow_Skin
+    100008: LeftFoot_Skin
+    100010: LeftHand_Skin
+    100012: LeftHip_Skin
+    100014: LeftKnee_Skin
+    100016: LeftShoulder_Skin
+    100018: Pelvis_Skin
+    100020: RightElbow_Skin
+    100022: RightFoot_Skin
+    100024: RightHand_Skin
+    100026: RightHip_Skin
+    100028: RightKnee_Skin
+    100030: RightShoulder_Skin
+    100032: Root_Skin
+    400000: Archer
+    400002: //RootNode
+    400004: Head_Skin
+    400006: LeftElbow_Skin
+    400008: LeftFoot_Skin
+    400010: LeftHand_Skin
+    400012: LeftHip_Skin
+    400014: LeftKnee_Skin
+    400016: LeftShoulder_Skin
+    400018: Pelvis_Skin
+    400020: RightElbow_Skin
+    400022: RightFoot_Skin
+    400024: RightHand_Skin
+    400026: RightHip_Skin
+    400028: RightKnee_Skin
+    400030: RightShoulder_Skin
+    400032: Root_Skin
+    4300000: Archer
+    7400000: Death
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: Archer
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Death
+      takeName: Take 001
+      firstFrame: 41
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Archer
+        weight: 1
+      - path: Root_Skin
+        weight: 1
+      - path: Root_Skin/Head_Skin
+        weight: 1
+      - path: Root_Skin/LeftShoulder_Skin
+        weight: 1
+      - path: Root_Skin/LeftShoulder_Skin/LeftElbow_Skin
+        weight: 1
+      - path: Root_Skin/LeftShoulder_Skin/LeftElbow_Skin/LeftHand_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin/LeftHip_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin/LeftHip_Skin/LeftKnee_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin/LeftHip_Skin/LeftKnee_Skin/LeftFoot_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin/RightHip_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin/RightHip_Skin/RightKnee_Skin
+        weight: 1
+      - path: Root_Skin/Pelvis_Skin/RightHip_Skin/RightKnee_Skin/RightFoot_Skin
+        weight: 1
+      - path: Root_Skin/RightShoulder_Skin
+        weight: 1
+      - path: Root_Skin/RightShoulder_Skin/RightElbow_Skin
+        weight: 1
+      - path: Root_Skin/RightShoulder_Skin/RightElbow_Skin/RightHand_Skin
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 120
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
