@@ -11,14 +11,18 @@ public class PlayerController : MonoBehaviour {
 
     private PlayerStats ps;
     private GameObject arrowSpawn;
+    private Animation archerAni;
 
     void Awake() {
         ps = GetComponent<PlayerStats>();
         arrowSpawn = FirstPerson.transform.FindChild("VerticalAnchor").FindChild("arm_with_bow").FindChild("ArrowSpawn").gameObject;
+        archerAni = ThirdPerson.transform.FindChild("Archer").GetComponent<Animation>();
     }
 
     void Update() {
         if(isDead()) {
+            archerAni.clip = archerAni.GetClip("Death");
+            archerAni.Play();
             Debug.Log("Player died!");
         }
         if(currentCameraMode == CameraMode.Third) {
