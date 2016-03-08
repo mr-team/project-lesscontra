@@ -1,11 +1,8 @@
 Dialogue file for Actor Actor_QuestGiver
 
 //Window 1
-/w fddf
+/w hello dear boy, pls fuck me!!
 
 //Window 2
-/w fd
-
-//Window 3
-/w s
+/w will you accept this challange?
 

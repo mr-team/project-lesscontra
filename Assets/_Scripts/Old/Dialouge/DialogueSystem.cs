@@ -5,11 +5,15 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
+	[SerializeField]
+	public Quest placeholderQuest;
+	QuestManager QuestManager;
 	Actor actor;
 	[HideInInspector]
 	public Canvas dialogueCanvas;
 	Text canvasText;
-	GameObject dialogueButtons;
+	GameObject dialogueButtonParent;
+	Button[] dialogueButtons = new Button[2];
 	[SerializeField]
 	public List<DialogueWindow> dialogueWindow = new List<DialogueWindow> ();
 	string currentDialWindowText;
@@ -27,13 +31,34 @@ public class DialogueSystem : MonoBehaviour
 
 	void Awake ()
 	{	
+		if (GameObject.Find ("Player") == null)
+			Debug.LogError ("There is no Gamobject named Player in the scene");
+		else if (GameObject.Find ("Player") != null)
+		{
+			QuestManager = GameObject.Find ("Player").GetComponent<QuestManager> ();
+
+		}
+
 		actor = gameObject.GetComponent<Actor> ();
 		dialogueCanvas = GameObject.Find ("DialogueCanvas").GetComponent<Canvas> ();
 		canvasText = GameObject.Find ("DialogueText").GetComponent<Text> ();
-		dialogueButtons = GameObject.Find ("DialogueButtons");
-		dialogueButtons.SetActive (false);
-		dialogueCanvas.gameObject.SetActive (false);
+		dialogueButtonParent = GameObject.Find ("DialogueButtons");
 
+		dialogueButtons [0] = GameObject.Find ("Button_Yes").GetComponent<Button> ();
+		dialogueButtons [1] = GameObject.Find ("Button_No").GetComponent<Button> ();
+
+		//delegates the function of the active dialogue to the two buttons
+		dialogueButtons [0].GetComponent<Button> ().onClick.AddListener (delegate
+		{
+			OnAnswerYes ();
+		});
+		dialogueButtons [1].GetComponent<Button> ().onClick.AddListener (delegate
+		{
+			OnAnswerNo ();
+		});
+
+		dialogueButtonParent.SetActive (false);
+		dialogueCanvas.gameObject.SetActive (false);
 	}
 
 	void Update ()
@@ -41,10 +66,11 @@ public class DialogueSystem : MonoBehaviour
 		if (active)
 		{
 			dialogueCanvas.gameObject.SetActive (true);
+
 			DisplayDialouge (dialogueWindow [0].DialogueText);
 			if (question)
 			{
-				dialogueButtons.SetActive (true);
+				dialogueButtonParent.SetActive (true);
 			}
 		}
 	}
@@ -68,6 +94,11 @@ public class DialogueSystem : MonoBehaviour
 			if (endDialouge)
 			{
 				EndDialogue ();
+			}
+
+			if (i != 0 && dialogueWindow [i - 1].IsQuestion)
+			{
+				dialogueButtonParent.SetActive (true);
 			}
 			goToNextWindow = false;
 		}
@@ -111,5 +142,24 @@ public class DialogueSystem : MonoBehaviour
 		if (active)
 			goToNextWindow = true;
 	}
+
+	void OnAnswerYes ()
+	{
+		//brute force
+		Quest placeholder_Quest = new Quest (actor);
+		placeholder_Quest.Objectives = new Objective[1];
+
+		placeholder_Quest.Objectives [0] = new Objective (GameObject.Find ("GenActKill").GetComponent<Actor> ());
+		placeholder_Quest.Active = true;
+
+
+		QuestManager.activeQuests [0] = placeholder_Quest;
+	}
+
+	void OnAnswerNo ()
+	{
+		endDialouge = true;
+	}
+
 
 }

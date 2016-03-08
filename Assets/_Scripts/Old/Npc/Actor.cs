@@ -29,6 +29,9 @@ public class ActorStats
 
 public class Actor : MonoBehaviour
 {
+	
+	public bool isDead;
+
 	protected GameController controller;
 	public ActorAtributes atributes;
 	public ActorStats stats;

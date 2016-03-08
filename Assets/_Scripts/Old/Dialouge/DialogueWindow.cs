@@ -8,9 +8,11 @@ public class DialogueWindow
 	[SerializeField]
 	string dialogueText;
 	[SerializeField]
+	[HideInInspector]
 	bool isQuestion;
 	[SerializeField]
 	int windowNum;
+	[HideInInspector]
 	[SerializeField]
 	bool lastWindow;
 

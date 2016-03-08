@@ -411,6 +411,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1853900543}
+  - {fileID: 984279622}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &564867157
@@ -809,7 +810,7 @@ GameObject:
   - 114: {fileID: 939387264}
   - 114: {fileID: 939387263}
   m_Layer: 5
-  m_Name: Button_top
+  m_Name: Button_Yes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -919,8 +920,10 @@ GameObject:
   - 65: {fileID: 984279625}
   - 23: {fileID: 984279624}
   - 54: {fileID: 984279623}
+  - 114: {fileID: 984279628}
+  - 114: {fileID: 984279627}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: GenActKill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -933,11 +936,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 984279621}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -55, y: 0.982, z: 0}
+  m_LocalPosition: {x: -43.21, y: 1.342, z: 17.54}
   m_LocalScale: {x: 0.31723094, y: 0.31723094, z: 0.31723094}
   m_Children: []
-  m_Father: {fileID: 1530742765}
-  m_RootOrder: 0
+  m_Father: {fileID: 560180935}
+  m_RootOrder: 1
 --- !u!54 &984279623
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -998,6 +1001,43 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 984279621}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &984279627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984279621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f5e6206535f9c74ea66fb1a82bbc2f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atributes:
+    actorName: CannonFodder
+    isHostile: 0
+    isQuestGiver: 0
+    isEssential: 0
+    hasDialouge: 0
+    isMerchant: 0
+    isSkillMaster: 0
+  stats:
+    health: 0
+    walkSpeed: 1.5
+    turnSpeed: 2
+  actorActions: []
+  dialouge: {fileID: 0}
+  canActivateDialogue: 0
+--- !u!114 &984279628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 984279621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea871cea7033f94a92eca7f299b3d82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1062030664
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,7 +1081,7 @@ GameObject:
   - 114: {fileID: 1506165238}
   - 114: {fileID: 1506165237}
   m_Layer: 5
-  m_Name: Button_middle
+  m_Name: Button_No
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1163,8 +1203,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.79, y: 0.36, z: 17.54}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 984279622}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1 &1597210341
@@ -1531,7 +1570,7 @@ MonoBehaviour:
   atributes:
     actorName: QuestMan
     isHostile: 0
-    isQuestGiver: 0
+    isQuestGiver: 1
     isEssential: 0
     hasDialouge: 1
     isMerchant: 0
@@ -1567,18 +1606,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueCanvas: {fileID: 0}
   dialogueWindow:
-  - dialogueText: fddf
-    isQuestion: 1
+  - dialogueText: hello dear boy, pls fuck me!!
+    isQuestion: 0
     windowNum: 0
     lastWindow: 0
-  - dialogueText: fd
-    isQuestion: 0
+  - dialogueText: will you accept this challange?
+    isQuestion: 1
     windowNum: 1
-    lastWindow: 0
-  - dialogueText: s
-    isQuestion: 0
-    windowNum: 2
-    lastWindow: 0
+    lastWindow: 1
   active: 0
   goToNextWindow: 0
   initialise: 1
@@ -1651,3 +1686,42 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1989017682}
+--- !u!1 &2019491199
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2019491201}
+  - 114: {fileID: 2019491200}
+  m_Layer: 0
+  m_Name: Player
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2019491200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2019491199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4607a8e5b97c6d44583f689c34013fc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2019491201
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2019491199}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -55.671844, y: 7.6542416, z: -6.156948}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9

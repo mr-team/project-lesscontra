@@ -1,72 +1,92 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerController : MonoBehaviour {
-    public enum CameraMode { First, Third, Arrow };
-    public CameraMode currentCameraMode = CameraMode.Third;
+[RequireComponent (typeof(QuestManager))]
+public class PlayerController : MonoBehaviour
+{
+	public enum CameraMode
+	{
+		First,
+		Third,
+		Arrow}
 
-    public GameObject FirstPerson;
-    public GameObject ThirdPerson;
-    public GameObject ArrowMode;
+	;
 
-    private PlayerStats ps;
-    private GameObject arrowSpawn;
+	public CameraMode currentCameraMode = CameraMode.Third;
 
-    void Awake() {
-        ps = GetComponent<PlayerStats>();
-        arrowSpawn = FirstPerson.transform.FindChild("VerticalAnchor").FindChild("arm_with_bow").FindChild("ArrowSpawn").gameObject;
-    }
+	public GameObject FirstPerson;
+	public GameObject ThirdPerson;
+	public GameObject ArrowMode;
 
-    void Update() {
-        if(isDead()) {
-            Debug.Log("Player died!");
-        }
-        if(currentCameraMode == CameraMode.Third) {
-            if (FirstPerson.activeInHierarchy)
-                FirstPerson.SetActive(false);
-            if (!ThirdPerson.activeInHierarchy)
-                ThirdPerson.SetActive(true);
+	private PlayerStats ps;
+	private GameObject arrowSpawn;
 
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
+	void Awake ()
+	{
+		ps = GetComponent<PlayerStats> ();
+		arrowSpawn = FirstPerson.transform.FindChild ("VerticalAnchor").FindChild ("arm_with_bow").FindChild ("ArrowSpawn").gameObject;
+	}
 
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                currentCameraMode = CameraMode.First;
-            }
-        } else if(currentCameraMode == CameraMode.First) {
-            if (!FirstPerson.activeInHierarchy)
-                FirstPerson.SetActive(true);
-            if (ThirdPerson.activeInHierarchy)
-                ThirdPerson.SetActive(false);
+	void Update ()
+	{
+		if (isDead ())
+		{
+			Debug.Log ("Player died!");
+		}
+		if (currentCameraMode == CameraMode.Third)
+		{
+			if (FirstPerson.activeInHierarchy)
+				FirstPerson.SetActive (false);
+			if (!ThirdPerson.activeInHierarchy)
+				ThirdPerson.SetActive (true);
 
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
 
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                currentCameraMode = CameraMode.Third;
-            }
-            if (Input.GetMouseButtonDown(0)) {
-                currentCameraMode = CameraMode.Arrow;
-                FirstPerson.SetActive(false);
-                Transform vert = FirstPerson.transform.FindChild("VerticalAnchor");
-                GameObject arrow = Instantiate(ArrowMode, arrowSpawn.transform.position, arrowSpawn.transform.rotation) as GameObject;
-            }
-        } else {
-            if (FirstPerson.activeInHierarchy)
-                FirstPerson.SetActive(false);
-            if (ThirdPerson.activeInHierarchy)
-                ThirdPerson.SetActive(false);
+			if (Input.GetKeyDown (KeyCode.Space))
+			{
+				currentCameraMode = CameraMode.First;
+			}
+		} else if (currentCameraMode == CameraMode.First)
+		{
+			if (!FirstPerson.activeInHierarchy)
+				FirstPerson.SetActive (true);
+			if (ThirdPerson.activeInHierarchy)
+				ThirdPerson.SetActive (false);
 
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-    }
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
 
-    public void takeDamage(float damage) {
-        ps.health -= Mathf.Clamp(damage, 0f, ps.health);
-    }
+			if (Input.GetKeyDown (KeyCode.Space))
+			{
+				currentCameraMode = CameraMode.Third;
+			}
+			if (Input.GetMouseButtonDown (0))
+			{
+				currentCameraMode = CameraMode.Arrow;
+				FirstPerson.SetActive (false);
+				Transform vert = FirstPerson.transform.FindChild ("VerticalAnchor");
+				GameObject arrow = Instantiate (ArrowMode, arrowSpawn.transform.position, arrowSpawn.transform.rotation) as GameObject;
+			}
+		} else
+		{
+			if (FirstPerson.activeInHierarchy)
+				FirstPerson.SetActive (false);
+			if (ThirdPerson.activeInHierarchy)
+				ThirdPerson.SetActive (false);
 
-    public bool isDead() {
-        return ps.health <= 0f;
-    }
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
+		}
+	}
+
+	public void takeDamage (float damage)
+	{
+		ps.health -= Mathf.Clamp (damage, 0f, ps.health);
+	}
+
+	public bool isDead ()
+	{
+		return ps.health <= 0f;
+	}
 }

@@ -23,17 +23,14 @@ public class DialougeEditor : EditorWindow
 	{
 		DialougeEditor dialogueEditor = (DialougeEditor)EditorWindow.GetWindow (typeof(DialougeEditor));
 		dialogueEditor.ShowPopup ();
-
 	}
 
 	public void OnGUI ()
 	{
-
 		selectedObject = Selection.activeGameObject;
 
 		if (!Application.isPlaying)
 		{
-			
 			saved = false;
 
 			if (selectedObject == null || selectedObject.GetComponent<NPC_Generic> () == null) //no actor selected
@@ -53,7 +50,6 @@ public class DialougeEditor : EditorWindow
 						selectedObject.AddComponent<DialogueSystem> ();
 						dialogue = selectedObject.GetComponent<DialogueSystem> ();
 						selectedActor.atributes.hasDialouge = true;
-
 					}
 				}
 
@@ -86,16 +82,6 @@ public class DialougeEditor : EditorWindow
 
 					for (int i = 0; i < dialogue.dialogueWindow.Count; i++)	//the draw loop
 					{
-						
-						if (dialogue.dialogueWindow [i].IsQuestion)
-						{
-							startRecord = true;
-						}
-						if (startRecord)
-						{
-							
-						}
-
 						DialogueWindow current = dialogue.dialogueWindow [i];	//set the current dialogue window
 						current.WindowNum = i;	//fix the dialogue window winNUm
 						EditorGUILayout.Space ();
@@ -113,27 +99,35 @@ public class DialougeEditor : EditorWindow
 						}
 						EditorGUILayout.EndHorizontal ();
 						EditorGUILayout.BeginHorizontal ();
-						if (GUILayout.Toggle (current.IsQuestion, "is this a question"))
+						if (i + 1 == dialogue.dialogueWindow.Count)
+							dialogue.dialogueWindow [i].LastWindow = true;
+						else
+							dialogue.dialogueWindow [i].LastWindow = false;
+						
+						if (dialogue.dialogueWindow [i].LastWindow)
 						{
-							current.IsQuestion = true;
+							if (GUILayout.Toggle (current.IsQuestion, "is this a question"))
+							{
+								current.IsQuestion = true;
 
-							//index = EditorGUI.Foldout()
+								//index = EditorGUI.Foldout()
 
-						} else
-						{
-							current.IsQuestion = false;
+							} else
+							{
+								current.IsQuestion = false;
+							}
 						}
 						EditorGUILayout.EndHorizontal ();
 						EditorGUILayout.Space ();
 						dialogue.dialogueWindow [i].DialogueText = EditorGUILayout.TextArea (dialogue.dialogueWindow [i].DialogueText, GUILayout.Height (50));
 
-					}
-					EditorGUILayout.Space ();
 
+					} //draw loop end
+
+					EditorGUILayout.Space ();
 
 					if (GUILayout.Button ("New Window"))
 					{
-						
 						dialogue.dialogueWindow.Add (new DialogueWindow ("", 0)); //create a new dialogue window with an empty string and a defult windownum of 0 (the draw loop takes care of the winNum)
 					}
 
