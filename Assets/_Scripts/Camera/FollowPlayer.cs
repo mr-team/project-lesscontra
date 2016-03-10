@@ -22,8 +22,8 @@ public class FollowPlayer : MonoBehaviour {
             transform.Rotate(new Vector3(0f, Input.GetAxis("Mouse X") * -mouseRotateSense, 0f));
         }
         transform.Rotate(new Vector3(0f, Input.GetAxis("Horizontal") * -rotateSense, 0f));
-
-        Vector3 newPos = new Vector3(cam.localPosition.x, cam.localPosition.y, cam.localPosition.z + Input.GetAxis("Vertical") * 0.1f);
+        float input = (Input.GetAxis("Mouse ScrollWheel") * 20f) + Input.GetAxis("Vertical");
+        Vector3 newPos = new Vector3(cam.localPosition.x, cam.localPosition.y, cam.localPosition.z + input * 0.1f);
         newPos.z = Mathf.Clamp(newPos.z, -5f, 3f);
         cam.localPosition = newPos;
     }
