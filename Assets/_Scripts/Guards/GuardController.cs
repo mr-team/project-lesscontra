@@ -19,12 +19,6 @@ public class GuardController : MonoBehaviour {
         player = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
-    void Update() {
-        if(gs.health <= 0f) {
-            Destroy(transform.gameObject);
-        }
-    }
-
     void FixedUpdate() {
         if(currentState == GuardState.Attacking) {
             if(Vector3.Distance(transform.position, player.transform.position) <= 1f) {
