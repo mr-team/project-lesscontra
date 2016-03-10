@@ -1,0 +1,176 @@
+fileFormatVersion: 2
+guid: fdc3bf1ec6b4fb64594848a93162195d
+timeCreated: 1457611211
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Head_Anm
+    100002: Head_CTRL
+    100004: Head_Skin
+    100006: Hip_Anim
+    100008: LeftArm_Anim
+    100010: LeftArm_IK
+    100012: LeftArm_PV
+    100014: LeftElbow_CTRL
+    100016: LeftElbow_Skin
+    100018: LeftFoot_CTRL
+    100020: LeftFoot_Skin
+    100022: LeftHand_CTRL
+    100024: LeftHand_Skin
+    100026: LeftKnee_CTRL
+    100028: LeftKnee_Skin
+    100030: LeftLeg_Anim
+    100032: LeftLeg_IK
+    100034: LeftLeg_PV
+    100036: LeftShoulder_CTRL
+    100038: LeftShoulder_Skin
+    100040: LeftThigh_CTRL
+    100042: LeftThigh_Skin
+    100044: Maincharacter
+    100046: Master_anim
+    100048: Neck_CTRL
+    100050: Neck_Skin
+    100052: Pelvis_CTRL
+    100054: Pelvis_Skin
+    100056: //RootNode
+    100058: RightArm_Anim
+    100060: RightArm_IK
+    100062: RightArm_PV
+    100064: RightElbow_CTRL
+    100066: RightElbow_Skin
+    100068: RightFoot_CTRL
+    100070: RightFoot_Skin
+    100072: RightHand_CTRL
+    100074: RightHand_Skin
+    100076: RightKnee_CTRL
+    100078: RightKnee_Skin
+    100080: RightLeg_Anim
+    100082: RightLeg_IK
+    100084: RightLeg_PV
+    100086: RightShoulder_CTRL
+    100088: RightShoulder_Skin
+    100090: RightThigh_CTRL
+    100092: RightThigh_Skin
+    100094: Root_CTRL
+    100096: Root_Skin
+    100098: Torso_Anim
+    100100: transform1
+    400000: Head_Anm
+    400002: Head_CTRL
+    400004: Head_Skin
+    400006: Hip_Anim
+    400008: LeftArm_Anim
+    400010: LeftArm_IK
+    400012: LeftArm_PV
+    400014: LeftElbow_CTRL
+    400016: LeftElbow_Skin
+    400018: LeftFoot_CTRL
+    400020: LeftFoot_Skin
+    400022: LeftHand_CTRL
+    400024: LeftHand_Skin
+    400026: LeftKnee_CTRL
+    400028: LeftKnee_Skin
+    400030: LeftLeg_Anim
+    400032: LeftLeg_IK
+    400034: LeftLeg_PV
+    400036: LeftShoulder_CTRL
+    400038: LeftShoulder_Skin
+    400040: LeftThigh_CTRL
+    400042: LeftThigh_Skin
+    400044: Maincharacter
+    400046: Master_anim
+    400048: Neck_CTRL
+    400050: Neck_Skin
+    400052: Pelvis_CTRL
+    400054: Pelvis_Skin
+    400056: //RootNode
+    400058: RightArm_Anim
+    400060: RightArm_IK
+    400062: RightArm_PV
+    400064: RightElbow_CTRL
+    400066: RightElbow_Skin
+    400068: RightFoot_CTRL
+    400070: RightFoot_Skin
+    400072: RightHand_CTRL
+    400074: RightHand_Skin
+    400076: RightKnee_CTRL
+    400078: RightKnee_Skin
+    400080: RightLeg_Anim
+    400082: RightLeg_IK
+    400084: RightLeg_PV
+    400086: RightShoulder_CTRL
+    400088: RightShoulder_Skin
+    400090: RightThigh_CTRL
+    400092: RightThigh_Skin
+    400094: Root_CTRL
+    400096: Root_Skin
+    400098: Torso_Anim
+    400100: transform1
+    4300000: Maincharacter
+    9500000: //RootNode
+    13700000: Maincharacter
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 50
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

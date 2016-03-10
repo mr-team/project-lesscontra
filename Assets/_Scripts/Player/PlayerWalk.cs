@@ -8,12 +8,12 @@ public class PlayerWalk : MonoBehaviour {
     public GameObject TPArcher;
 
     private PlayerController PC;
-    private Animation archerAni;
+    private Animator archerAni;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         PC = GetComponent<PlayerController>();
-        archerAni = TPArcher.GetComponent<Animation>();
+        archerAni = TPArcher.GetComponent<Animator>();
     }
 
     private float coolDownAnimation = 1f;
@@ -22,15 +22,6 @@ public class PlayerWalk : MonoBehaviour {
         coolWalkAnimation += Time.deltaTime;
         if(PC.isDead())
             return;
-        if(isWalking()) {
-            Debug.Log("Walking");
-            archerAni.clip = archerAni.GetClip("Walk");
-            if(!archerAni.isPlaying)
-                archerAni.Play();
-        } else {
-            archerAni.clip = archerAni.GetClip("Death");
-            archerAni.Stop();
-        }
         if(Input.GetMouseButtonUp(0)) {
             coolWalkAnimation = coolDownAnimation;
         }
