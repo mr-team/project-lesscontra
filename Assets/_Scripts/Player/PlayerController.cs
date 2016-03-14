@@ -20,19 +20,24 @@ public class PlayerController : MonoBehaviour
 
 	private PlayerStats ps;
 	private GameObject arrowSpawn;
+    private Animator animator;
 
 	void Awake ()
 	{
 		ps = GetComponent<PlayerStats> ();
 		arrowSpawn = FirstPerson.transform.FindChild ("VerticalAnchor").FindChild ("arm_with_bow").FindChild ("ArrowSpawn").gameObject;
+        animator = ThirdPerson.transform.FindChild("Archer").GetComponent<Animator>();
 	}
 
 	void Update ()
 	{
-		if (isDead ())
+        if (isDead ())
 		{
 			Debug.Log ("Player died!");
-		}
+
+            animator.SetBool("dead", true);
+        }
+
 		if (currentCameraMode == CameraMode.Third)
 		{
 			if (FirstPerson.activeInHierarchy)

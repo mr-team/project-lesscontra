@@ -7,15 +7,18 @@ public class PlayerWalk : MonoBehaviour {
     public GameObject[] feedBackElements;
 
     private PlayerController PC;
+    private Animator tpAnim;
 
     void Start() {
         agent = GetComponent<NavMeshAgent>();
         PC = GetComponent<PlayerController>();
+        tpAnim = PC.ThirdPerson.transform.FindChild("Archer").GetComponent<Animator>();
     }
 
     private float coolDownAnimation = 1f;
     private float coolWalkAnimation = 1f;
 	void Update() {
+        tpAnim.SetBool("walking", agent.velocity != Vector3.zero);
         coolWalkAnimation += Time.deltaTime;
         if(Input.GetMouseButtonUp(0)) {
             coolWalkAnimation = coolDownAnimation;
