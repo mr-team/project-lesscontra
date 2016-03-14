@@ -8,7 +8,6 @@ using System;
 [Serializable]
 public class ActorAtributes
 {
-
 	public string actorName;
 	public bool isHostile = false;
 	public bool isQuestGiver = false;
@@ -66,6 +65,13 @@ public class Actor : MonoBehaviour
 		actorControll = GetComponent<NpcController> ();
 		CheckSetup ();
 	}
+
+	protected virtual void Update ()
+	{
+		if (stats.health <= 0)
+			Kill ();
+	}
+
 
 	void CheckSetup ()
 	{
@@ -144,5 +150,17 @@ public class Actor : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public virtual void Kill ()
+	{
+		Debug.Log ("I " + this.gameObject + " Died");
+	}
+
+	public virtual void GiveDamage (float damage)
+	{
+		Debug.Log ("I " + this.gameObject + " was given" + damage + " damage");
+
+		stats.health -= damage; 
 	}
 }
